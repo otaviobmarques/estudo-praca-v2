@@ -116,3 +116,19 @@ describe("Sem notas internas no relatório (pedido do Otávio, 29/10/2026)", () 
 it("sem o título órfão 'Leitura do estudo' (o aviso fixo fica no rodapé)", () => {
   for (const m of ["auto-visao", "royal"] as const) expect(texto(montarHtml(D(m, "full", true)))).not.toMatch(/Leitura do estudo/i);
 });
+
+describe("Proposta comercial em destaque (pedido do Otávio, 29/10/2026)", () => {
+  it.each(["auto-visao", "royal"] as const)("%s: título novo e quadro destacado nos dois modelos", (m) => {
+    for (const mod of ["full", "home_based"] as const) {
+      const h = montarHtml(D(m, mod, false)); const t = texto(h);
+      expect(t).toContain(mod === "full" ? "Proposta comercial" : "Proposta comercial Home Based");
+      expect(t).not.toMatch(/Oferta de franquia/i);
+      expect(h).toContain('<div class="bl bl-oferta">');
+    }
+  });
+  it("tela: título novo no painel e na prévia, prévia destacada", async () => {
+    const fs = await import("node:fs"); const h = fs.readFileSync("modelos/tela/painel.html", "utf8");
+    expect(h).not.toMatch(/Oferta de franquia/i); expect(h.match(/Proposta comercial/g)).toHaveLength(2);
+    expect(h).toContain('<section class="bloco bloco-oferta">');
+  });
+});

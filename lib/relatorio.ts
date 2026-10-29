@@ -47,7 +47,14 @@ export function motivoBloqueio(d: Pick<DadosRelatorio, "modelo" | "laudosHomeBas
 
 /** Ajustes pedidos pelo Otávio (29/10/2026): contatos logo abaixo do título da seção, sem vão; oferta em lista. */
 const CSS_AJUSTES = `.contato{margin-top:0}
-.of-abre{margin-bottom:1mm}.of-lista{margin:0;padding-left:4.5mm}.of-lista li{margin:.4mm 0}`;
+.of-abre{margin-bottom:1mm}.of-lista{margin:0;padding-left:4.5mm}.of-lista li{margin:.4mm 0}
+[data-marca="auto-visao"] .bl-oferta{background:var(--p);color:var(--b)}
+[data-marca="auto-visao"] .bl-oferta h2,[data-marca="auto-visao"] .bl-oferta p,[data-marca="auto-visao"] .bl-oferta li{color:var(--b)}
+[data-marca="auto-visao"] .bl-oferta h2 svg{color:var(--v)}
+[data-marca="auto-visao"] .bl-oferta .of span{color:#D9D6D8}[data-marca="auto-visao"] .bl-oferta .of b{color:var(--v)}
+[data-marca="royal"] .bl-oferta{background:var(--k);color:var(--w);border-color:var(--k)}
+[data-marca="royal"] .bl-oferta h2,[data-marca="royal"] .bl-oferta p,[data-marca="royal"] .bl-oferta li{color:var(--w)}
+[data-marca="royal"] .bl-oferta .of span{color:#B9B5A6}[data-marca="royal"] .bl-oferta .of b{color:var(--o)}`;
 
 /** Ajustes da página deitada do DRE (10 meses + total). Usa as cores e fontes de cada marca (estilo.css da Julia). */
 const CSS_DRE_MESES = `@page horizontal{size:A4 landscape;margin:0}
@@ -223,6 +230,8 @@ export function montarHtml(d: DadosRelatorio): string {
   pc = troca(pc, /<div class="of">[\s\S]*?<\/div><\/div>\s*<p>[^<]*<\/p>/, `<div class="of${parc ? "" : " of-2"}">
 <div><span>Taxa total</span><b>${R0(d.oferta.valorFranquia)}</b></div><div><span>Entrada</span><b>${R0(d.oferta.entrada)}</b></div>${parc ? `<div><span>Parcelas</span><b>${d.oferta.numeroParcelas} × ${R0(d.oferta.valorParcela)}</b></div>` : ""}</div>
 ${textoOferta(d.oferta.texto)}`);
+  // "Proposta comercial" em destaque no lugar de "Oferta de franquia" (pedido do Otávio, 29/10/2026)
+  pc = troca(pc, /<div class="bl">(<h2>(?:<svg(?:(?!<\/svg>).)*<\/svg>)?)Oferta de franquia/s, '<div class="bl bl-oferta">$1Proposta comercial');
   // notas internas do modelo da Julia não vão para o relatório (pedido do Otávio, 29/10/2026)
   pc = pc.replace(/<p class="prem" style="margin-top:2mm">Condição comercial[^<]*<\/p>/, "");
   pc = troca(pc, /(<ul class="entreg">)[\s\S]*?(<\/ul>)/, `$1${[...ENTREGAVEIS_BASE, ...(hb ? [] : ENTREGAVEIS_FULL_EXTRA)].map((e) => `<li><i></i>${esc(e)}</li>`).join("")}$2`);

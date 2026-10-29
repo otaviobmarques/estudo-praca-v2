@@ -1,6 +1,7 @@
 # Registro de mudanças
 ## [Não lançado]
 ### Alterado
+- "Oferta de franquia" passa a se chamar "Proposta comercial" (PDF, prévia e painel) e ganha destaque: fundo escuro da marca com os valores em vermelho (Auto Visão) ou laranja (Royal), como o quadro de resultado do DRE (pedido do Otávio).
 - Oferta do Full: texto padrão "Entrada inclui:" com a lista Kit de Câmeras e Biometria homologados pelo DETRAN · Projeto Arquitetônico · 2 Vagas de Treinamento · Sistema e App de Laudos (pedido do Otávio). Texto de várias linhas sai em lista no PDF e na tela.
 - Removidas do relatório as notas internas do modelo ("população e frota de Joinville são valores de EXEMPLO herdados do sistema atual…" e "Condição comercial como digitada no painel…"), também no Exemplo Joinville, e o título "Leitura do estudo", que ficou sem conteúdo.
 - Tela principal mais compacta (botões, campos, títulos, cartões e painel menores) e Administração refeita com o mesmo design system da tela (cabeçalho, blocos, campos, botões e selos; redefinição de senha em linha, sem janela do navegador).

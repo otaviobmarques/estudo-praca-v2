@@ -3,7 +3,8 @@
 - selos "EXEMPLO" dos cartões e do DRE só aparecem no Exemplo Joinville (classe .so-exemplo);
 - versão compacta (botões, campos, títulos e cartões menores) e uma família de fonte por papel
   (fontes servidas pelo próprio sistema em app/fontes.css);
-- seta única no campo UF.
+- seta única no campo UF;
+- "Proposta comercial" (antes "Oferta de franquia") com a prévia em destaque.
 Uso no painel.html já gerado: python3 scripts/tela_ajustes.py modelos/tela/painel.html"""
 import re
 import sys
@@ -20,6 +21,10 @@ def ajustar(body: str) -> str:
     R('Estimativa IBGE 2025 · EXEMPLO</div>', 'Estimativa IBGE 2025<span class="so-exemplo"> · EXEMPLO</span></div>')
     R('Senatran, set/2026 · EXEMPLO</div>', 'Senatran, set/2026<span class="so-exemplo"> · EXEMPLO</span></div>')
     R('<span class="tag-ex">EXEMPLO</span>', '<span class="tag-ex so-exemplo">EXEMPLO</span>', 2)
+    # "Proposta comercial" em destaque no lugar de "Oferta de franquia"
+    R('<use href="#ic-oferta-franquia"/></svg>Oferta de franquia</h2>', '<use href="#ic-oferta-franquia"/></svg>Proposta comercial</h2>')
+    R('<section class="bloco">\n        <h3><svg class="ic"><use href="#ic-oferta-franquia"/></svg>Oferta de franquia</h3>',
+      '<section class="bloco bloco-oferta">\n        <h3><svg class="ic"><use href="#ic-oferta-franquia"/></svg>Proposta comercial</h3>')
     return body
 
 
@@ -47,6 +52,8 @@ body{font-size:13px}
 .resultado b{font-size:22px}.rn b{font-size:22px}.rede{padding:var(--esp-4)}.rede-tit{font-size:19px}
 .oferta-num b{font-size:18px}
 #f-txt{height:118px}#r-txt .of-lista{margin:4px 0 0;padding-left:18px}
+.bloco.bloco-oferta{background:var(--cor-escura);color:var(--cor-sobre-escura);border-color:transparent}
+.bloco-oferta h3 .ic{color:var(--cor-primaria)}.bloco-oferta .oferta-num span{color:var(--cor-sobre-escura);opacity:.8}.bloco-oferta .oferta-num b{color:var(--cor-primaria)}
 .bloco{padding:var(--esp-4)}.bloco h3{font-size:15px}
 .cen th,.cen td{padding:7px 10px}
 .marca-dagua{font-size:140px}
