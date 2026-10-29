@@ -1,0 +1,11 @@
+{
+  "name": "Estudo de Praça v2",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:1-22-bookworm",
+  "features": { "ghcr.io/devcontainers/features/docker-in-docker:2": {} },
+  "hostRequirements": { "cpus": 2, "memory": "8gb" },
+  "forwardPorts": [3000],
+  "portsAttributes": { "3000": { "label": "Estudo de Praça", "onAutoForward": "openBrowser" } },
+  "postCreateCommand": "bash .devcontainer/preparar.sh",
+  "postStartCommand": "bash .devcontainer/iniciar.sh",
+  "customizations": { "codespaces": { "openFiles": [".devcontainer/LEIA-ME.md"] } }
+}

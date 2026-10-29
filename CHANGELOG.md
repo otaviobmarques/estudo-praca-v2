@@ -1,4 +1,7 @@
 # Registro de mudanças
+## [Não lançado]
+### Adicionado
+- `.devcontainer/` para rodar o sistema no GitHub Codespaces sem instalar nada no computador: Chromium, fontes do relatório (Inter, Nunito, Raleway), Postgres e migrações automáticos; passos finais em `.devcontainer/LEIA-ME.md`.
 ## [0.2.1] — 2026-10-29
 ### Adicionado
 - Home Based: campo "Marketing (R$/mês)", que começa zerado (decisão 45 do escopo v2.0).
