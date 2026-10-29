@@ -1,6 +1,7 @@
 # Registro de mudanças
 ## [Não lançado — celular e PWA]
 ### Adicionado
+- **PWA** (ADR-0006): instalável como aplicativo (manifesto, ícones neutros em `public/icones`, service worker). Guarda só arquivos fixos e a página "Sem conexão"; a API e as páginas vão sempre à rede, nada de estudo ou sessão fica no aparelho.
 - **Versão para celular e tablet** (até 900 px): dados em cima e relatório embaixo, barra fixa com Dados, Relatório e PDF, cartões em 2 colunas, tabelas com rolagem dentro do bloco, campos de 16 px (sem zoom no iPhone). Administração com usuários em cartões e formulários em uma coluna; login sem rolagem lateral. `scripts/tela_celular.py`, usado por `montar_tela.py`.
 ## [Não lançado]
 ### Alterado

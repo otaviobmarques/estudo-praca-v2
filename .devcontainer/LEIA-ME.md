@@ -33,3 +33,13 @@ docker exec -i estudo-praca-db psql -U estudo -p 5433 -d estudo_praca -c "update
 ```
 
 Ao terminar, pare o Codespace (github.com/codespaces → ⋯ → Stop) para não gastar a cota gratuita.
+
+## Instalar como aplicativo (PWA)
+
+Com o sistema aberto no navegador (endereço `https://...-3000.app.github.dev`):
+
+- **Computador (Chrome ou Edge):** ícone de instalar na barra de endereço → **Instalar**.
+- **Android (Chrome):** menu ⋮ → **Instalar app** (ou **Adicionar à tela inicial**).
+- **iPhone (Safari):** botão Compartilhar → **Adicionar à Tela de Início**.
+
+O aplicativo usa a internet para tudo (os estudos são calculados no servidor e nada fica guardado no aparelho). Sem conexão, mostra a página "Sem conexão". Com o Codespace parado, o endereço não abre.
