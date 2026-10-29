@@ -1,0 +1,87 @@
+/* Variação ilustrada Royal — guia "Direção Visual Royal Vistorias" v1.0 + DS Royal v1.0. Nada da Auto Visão. */
+:root{--o:#ED712F;--k:#101419;--w:#F7F3E2;--b:#FFFFFF;--s2:#EEEBDF;--ln:#D9D4C2;--mu:#575B62;--g:#1B2027}
+@page{size:A4;margin:0}
+*{box-sizing:border-box;margin:0;font-feature-settings:"lnum" 1,"tnum" 1}
+body{font-family:Inter,sans-serif;color:var(--k);font-size:9.5pt;line-height:1.45}
+.pag{width:210mm;height:297mm;position:relative;overflow:hidden;background:var(--w);page-break-after:always;display:flex;flex-direction:column}
+.pag:last-child{page-break-after:auto}
+h1,h2,.num{font-family:Raleway,sans-serif;text-transform:uppercase}
+.chf{clip-path:polygon(4mm 0,100% 0,100% calc(100% - 4mm),calc(100% - 4mm) 100%,0 100%,0 4mm)}
+.capa{background:var(--k);color:var(--w);height:100mm;position:relative;padding:11mm 15mm 0 21mm;overflow:hidden}
+.capa .dgs{position:absolute;inset:0;width:100%;height:100%}
+.capa img.logo{height:12mm;position:relative}
+.kick{display:flex;align-items:center;gap:3mm;margin-top:9mm;font:700 9pt Inter;letter-spacing:.18em;text-transform:uppercase;color:var(--w);position:relative}
+.kick:before{content:"";width:9mm;height:1.1mm;background:var(--o)}
+.capa h1{font-weight:900;font-size:21pt;line-height:1.05;margin-top:3mm;position:relative;letter-spacing:-.01em}
+.capa h1 em{display:block;font-style:normal;color:var(--o);font-size:36pt}
+.capa .cena{position:absolute;right:10mm;bottom:9mm;width:92mm;background:var(--g);padding:2mm}
+.rtag{position:absolute;left:3mm;bottom:3mm;background:var(--w);color:var(--k);font:800 7pt Inter;text-transform:uppercase;padding:1.2mm 2.5mm 1.2mm 2mm;display:flex;gap:2mm;align-items:center;clip-path:polygon(1.5mm 0,100% 0,100% calc(100% - 1.5mm),calc(100% - 1.5mm) 100%,0 100%,0 1.5mm)}
+.rtag i{width:3mm;height:3mm;background:var(--o);display:inline-block}
+.ilus-mark{position:absolute;right:3mm;top:2.5mm;font:700 6.5pt Inter;color:var(--w);text-transform:uppercase;letter-spacing:.1em}
+.selo-ex{position:absolute;top:11mm;right:15mm;background:var(--o);color:var(--k);font:800 9pt Inter;padding:1.6mm 3.5mm;z-index:3;clip-path:polygon(1.5mm 0,100% 0,100% calc(100% - 1.5mm),calc(100% - 1.5mm) 100%,0 100%,0 1.5mm)}
+.meta{background:var(--g);color:var(--w);padding:2.6mm 15mm 2.6mm 21mm;font-size:8.5pt}
+.faixa{height:5mm;background:url(royal-grafismo-faixa.png) left center/auto 100% repeat-x}
+.corpo{padding:5mm 15mm 0 21mm;display:flex;flex-direction:column;gap:4mm;flex:1}
+h2{font-weight:900;font-size:13pt;display:flex;align-items:center;gap:2.5mm;letter-spacing:-.01em}
+h2:before{content:"";width:9mm;height:1.1mm;background:var(--o);flex:none}
+.cen{display:flex;align-items:center;gap:2.5mm;background:var(--o);color:var(--k);padding:2.4mm 4mm;font-size:9.5pt}
+.ind{display:grid;grid-template-columns:repeat(3,1fr);gap:3.5mm}
+.c{background:var(--b);border:1px solid var(--ln);padding:3mm 4mm;display:grid;grid-template-columns:1fr 16mm;align-items:center;gap:2mm;position:relative}
+.c:after{content:"";position:absolute;left:0;top:0;width:11mm;height:1.1mm;background:var(--o)}
+.c .r{font-size:8pt;font-weight:700;color:var(--mu);text-transform:uppercase;letter-spacing:.06em}
+.c .num{font-weight:900;font-size:16pt;line-height:1.15}
+.c .f{font-size:7pt;color:var(--mu)}
+.c svg{width:16mm;height:auto}
+.c.d{background:var(--k);color:var(--w);border-color:var(--k);grid-template-columns:1fr 13mm}.c.d .r,.c.d .f{color:#B9B5A6}.c.d .num{color:var(--o);font-size:14.5pt;white-space:nowrap}.c.d svg{width:13mm}
+table{width:100%;border-collapse:collapse;background:var(--b)}
+th,td{padding:1.8mm 3mm;text-align:right;border-bottom:1px solid var(--ln)}
+th:first-child,td:first-child{text-align:left}
+thead th{font-size:8pt;color:var(--w);background:var(--k);font-weight:700;text-transform:uppercase;letter-spacing:.04em}
+thead th:first-child{clip-path:polygon(3mm 0,100% 0,100% 100%,0 100%,0 3mm)}
+tr.t td{font-weight:800}
+.prem{font-size:8pt;color:var(--mu)}
+.aviso{border-left:1.6mm solid var(--o);background:var(--b);border-top:1px solid var(--ln);border-bottom:1px solid var(--ln);border-right:1px solid var(--ln);padding:3.5mm 4.5mm;font-size:8.5pt}
+.mini{background:var(--k);padding:5mm 15mm 5mm 21mm;display:flex;justify-content:space-between;align-items:center;color:var(--w);font:900 11pt Raleway;text-transform:uppercase;position:relative;overflow:hidden}
+.mini .dgs{position:absolute;inset:0;width:100%;height:100%}.mini img,.mini span{position:relative}.mini img{height:8mm}
+.duas{display:grid;grid-template-columns:1fr 1fr;gap:5mm}
+.bl{background:var(--b);border:1px solid var(--ln);padding:4mm 5mm;position:relative}
+ul{list-style:none;padding:0;display:flex;flex-direction:column;gap:1.3mm;margin-top:2.5mm}
+ul li{padding-left:4.5mm;position:relative}ul li:before{content:"";position:absolute;left:0;top:1.6mm;width:2mm;height:2mm;background:var(--o);transform:rotate(45deg)}
+.of{display:grid;grid-template-columns:1fr 1fr 1.4fr;gap:2mm;margin:2.5mm 0;white-space:nowrap}
+.of b{display:block;font:900 12pt Raleway}.of span{font-size:7.5pt;color:var(--mu)}
+.fontes td,.fontes th{font-size:8pt;text-align:left}
+.contato{display:flex;align-items:center;gap:4mm;background:var(--o);color:var(--k);padding:3.5mm 5mm;margin-top:auto}
+.contato b{font:900 13pt Raleway;display:block;text-transform:uppercase}.contato span{font-size:8pt;font-weight:600}
+.dre td:nth-child(2),.dre td:nth-child(3),.dre th:nth-child(2),.dre th:nth-child(3){text-align:right}
+.dre tr.s td:first-child{padding-left:7mm}.dre tr.t td{font-weight:800;border-top:1.2px solid var(--k);background:var(--s2)}
+.res{display:grid;grid-template-columns:1.3fr 1fr auto;align-items:center;gap:5mm;background:var(--k);color:var(--w);padding:5mm 6mm}
+.res span{display:block;font-size:8.5pt;color:#B9B5A6}.res b{font:900 20pt Raleway;color:var(--o)}
+.res .est{border:1.5px solid var(--w);padding:1.5mm 4mm;font-weight:700;font-size:9pt}
+.dre-cab{display:flex;justify-content:space-between;align-items:center}.dre-cab svg{width:16mm}
+.ref{padding:0 15mm 0 21mm;font-size:7.2pt;line-height:1.35;font-weight:600;margin-top:2mm}
+.rodape{padding:3mm 15mm 3mm 21mm;border-top:1px solid var(--ln);display:flex;justify-content:space-between;font-size:7.5pt;color:var(--mu);margin-top:2mm}
+.mdagua{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-30deg);width:170mm;height:64mm;z-index:5;pointer-events:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 300'%3E%3Ctext x='400' y='210' text-anchor='middle' font-family='Arial Black,Arial' font-weight='900' font-size='140' fill='%23000' fill-opacity='.07'%3EEXEMPLO%3C/text%3E%3C/svg%3E") center/contain no-repeat}
+.mlogo{position:absolute;left:50%;bottom:40mm;transform:translateX(-50%);width:90mm;opacity:.06;z-index:4;pointer-events:none}.mlogo img{width:100%}
+.lateral{position:absolute;left:0;top:0;width:297mm;height:6mm;transform-origin:0 0;transform:translateX(6mm) rotate(90deg);z-index:6;background:var(--w);border-top:1px solid var(--ln);display:flex;align-items:center;justify-content:center;font:600 7pt Inter;color:var(--mu);white-space:nowrap}
+.rede{display:grid;grid-template-columns:1fr 1.3fr;gap:5mm;align-items:center;background:var(--k);color:var(--w);padding:4mm 6mm;clip-path:polygon(5mm 0,100% 0,100% calc(100% - 5mm),calc(100% - 5mm) 100%,0 100%,0 5mm)}
+.rede h2{color:var(--w);font-size:11pt}.rede-conf{font-size:8.5pt;margin-top:1.5mm}
+.rede-nums{display:grid;grid-template-columns:repeat(3,1fr);gap:3mm}
+.rn{display:flex;flex-direction:column;gap:.5mm;border-left:1px solid #2F3640;padding-left:3mm}
+.rn svg{width:6mm;height:6mm;color:var(--o)}.rn b{font:900 18pt Raleway;color:var(--o);line-height:1.1}.rn span{font-size:8pt}
+.capa{height:92mm}
+.capa h1{font-size:17pt;max-width:105mm}.capa h1 em{font-size:32pt}
+.capa .cena{width:72mm;top:22mm;bottom:auto;right:14mm}
+.selo-ex{top:9mm}
+th,td{white-space:nowrap;font-size:9pt;padding:1.6mm 2.5mm}
+.c .r{font-size:7pt;letter-spacing:.03em;white-space:nowrap}
+.c{grid-template-columns:1fr 14mm}.c svg{width:14mm}
+.sec{display:flex;align-items:center;gap:2.5mm;font:900 8pt Raleway;letter-spacing:.14em;text-transform:uppercase;color:var(--k);border-bottom:1px solid #CCC9C8;padding-bottom:1.2mm}
+.sec span{display:inline-grid;place-items:center;width:6mm;height:6mm;background:var(--o);color:var(--k);clip-path:polygon(1.5mm 0,100% 0,100% calc(100% - 1.5mm),calc(100% - 1.5mm) 100%,0 100%,0 1.5mm)}
+.capa{height:80mm}.capa .cena{width:62mm;top:20mm}
+.ind{gap:2.5mm}.c{padding:2.5mm 4mm}
+.capa .cena{width:56mm;top:18mm}
+/* v1.5 entregáveis — marcador chanfrado do guia */
+.entreg{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:1.3mm 6mm;margin:1.5mm 0 0;padding:0}
+.entreg li{display:flex;gap:2mm;align-items:center;font:500 8.6pt/1.3 Inter}
+.entreg li i{width:3.4mm;height:3.4mm;background:var(--o);flex:none;clip-path:polygon(1mm 0,100% 0,100% calc(100% - 1mm),calc(100% - 1mm) 100%,0 100%,0 1mm)}
+.of.of-2{grid-template-columns:1fr 1fr}

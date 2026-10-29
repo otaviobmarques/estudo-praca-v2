@@ -1,0 +1,245 @@
+openapi: 3.1.0
+info:
+  title: API do Gerador de Estudo de Praça
+  version: 0.2.0
+  description: >
+    Rotas internas do sistema. Todas exigem sessão (cookie `sessao`), exceto entrar e as rotas de senha.
+    Erros seguem o formato Problem Details (RFC 9457), com `content-type: application/problem+json`.
+    Nenhum estudo é guardado: o PDF/PNG é gerado na hora.
+servers:
+  - url: "{base}/api/v1"
+    variables: { base: { default: "http://localhost:3000" } }
+tags:
+  - { name: Sessão }
+  - { name: Senha }
+  - { name: Estudo }
+  - { name: Administração }
+security: [{ sessao: [] }]
+components:
+  securitySchemes:
+    sessao: { type: apiKey, in: cookie, name: sessao, description: "Código opaco aleatório; no banco fica só o SHA-256. HttpOnly, SameSite=Lax, Secure em produção. Validade 12 h." }
+  schemas:
+    Problema:
+      type: object
+      properties:
+        type: { type: string, example: "about:blank" }
+        title: { type: string, example: "Dados inválidos" }
+        status: { type: integer, example: 422 }
+        detail: { type: [string, "null"] }
+    Entrar:
+      type: object
+      required: [identificador, senha]
+      properties:
+        identificador: { type: string, maxLength: 254, description: "Nome de usuário ou e-mail" }
+        senha: { type: string, maxLength: 128 }
+    PedidoSenha:
+      type: object
+      required: [email]
+      properties: { email: { type: string, minLength: 3, maxLength: 254, description: "E-mail ou nome de usuário" } }
+    NovaSenha:
+      type: object
+      required: [token, senha, confirmacao]
+      properties:
+        token: { type: string, minLength: 20, maxLength: 100 }
+        senha: { type: string, maxLength: 128, description: "Mínimo 8 caracteres, com maiúscula, minúscula e número" }
+        confirmacao: { type: string, maxLength: 128 }
+    Municipio:
+      type: object
+      properties:
+        cod_ibge: { type: string, example: "4209102" }
+        nome: { type: string, example: "Joinville" }
+        uf: { type: string, example: "SC" }
+        populacao: { type: integer, example: 664541 }
+        frota: { type: integer, example: 498378 }
+    Rede:
+      type: object
+      required: [lojas, estados, laudos_mes, frase_full, frase_home_based]
+      properties:
+        destaque: { type: [string, "null"], maxLength: 80 }
+        lojas: { type: string, maxLength: 20, example: "+70" }
+        estados: { type: string, maxLength: 20, example: "+10" }
+        laudos_mes: { type: string, maxLength: 20, example: "+30.000" }
+        frase_full: { type: string, maxLength: 140 }
+        frase_home_based: { type: string, maxLength: 140 }
+    Oferta:
+      type: object
+      required: [valorFranquia, entrada, parcelamento, numeroParcelas, valorParcela]
+      properties:
+        valorFranquia: { type: number, minimum: 0, example: 30000 }
+        entrada: { type: number, minimum: 0, example: 10000 }
+        parcelamento: { type: boolean, example: true }
+        numeroParcelas: { type: integer, minimum: 0, maximum: 120, example: 20 }
+        valorParcela: { type: number, minimum: 0, example: 1000 }
+        texto: { type: string, maxLength: 400 }
+    ParametrosDre:
+      type: object
+      description: "Todos os custos do DRE (valores em R$, percentuais em %). Se ausente, valem os padrões da planilha (no Home Based, com as despesas que não se aplicam zeradas)."
+      properties:
+        impostosPercentual: { type: number, example: 6 }
+        custoDetranPorVistoria: { type: number }
+        custoPesquisaCautelar: { type: number, example: 25 }
+        marketingPorTransferencia: { type: number }
+        parcelaFranquia: { type: number, example: 1000 }
+        royaltiesPorLaudo: { type: number, example: 8 }
+        laudosPorFuncionario: { type: number, minimum: 1, example: 200 }
+        salario: { type: number, example: 1700 }
+        encargosPercentual: { type: number, example: 50 }
+        despesasFixas:
+          type: object
+          properties:
+            aluguel: { type: number }
+            agua: { type: number }
+            energia: { type: number }
+            internetTelefonia: { type: number }
+            contabilidade: { type: number }
+            manutencaoPredial: { type: number }
+            materialEscritorio: { type: number }
+            impressoes: { type: number }
+            sistemaFilmagem: { type: number }
+            canalOuvidoria: { type: number }
+            certificacaoIsoSeguros: { type: number }
+            despesasGerais: { type: number }
+    Estudo:
+      type: object
+      required: [marca, modelo, cidade, uf, populacao, frota, cenario, percentuais, percentualDetran, ticketDetran, ticketCautelar, ecvs, laudosHomeBased, incluirDre, laudosUnidade, oferta, exemplo]
+      properties:
+        marca: { type: string, enum: [auto-visao, royal] }
+        modelo: { type: string, enum: [full, home_based] }
+        cidade: { type: string, maxLength: 80, example: Joinville }
+        uf: { type: string, minLength: 2, maxLength: 2, example: SC }
+        populacao: { type: number, example: 664541 }
+        frota: { type: number, example: 498378 }
+        cenario: { type: string, enum: [conservador, provavel, otimista] }
+        percentuais: { type: object, properties: { conservador: { type: number, example: 1.5 }, provavel: { type: number, example: 2 }, otimista: { type: number, example: 2.5 } } }
+        percentualDetran: { type: number, maximum: 100, example: 90 }
+        ticketDetran: { type: number, example: 147 }
+        ticketCautelar: { type: number, example: 280, description: "No Home Based, é o preço do laudo" }
+        ecvs: { type: [number, "null"] }
+        laudosHomeBased: { type: [number, "null"], description: "Obrigatório no Home Based (vazio bloqueia o PDF)" }
+        incluirDre: { type: boolean, default: false }
+        laudosUnidade: { type: [number, "null"], description: "Laudos/mês da unidade (Full). Obrigatório se incluirDre" }
+        oferta: { $ref: "#/components/schemas/Oferta" }
+        exemplo: { type: boolean, description: "Marca d'água e selos de EXEMPLO" }
+        dre: { $ref: "#/components/schemas/ParametrosDre" }
+  responses:
+    NaoAutenticado: { description: Sem sessão válida, content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problema" } } } }
+    Proibido: { description: Acesso restrito ao administrador, content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problema" } } } }
+    Invalido: { description: Dados inválidos, content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problema" } } } }
+paths:
+  /sessoes:
+    post:
+      tags: [Sessão]
+      summary: Entrar
+      operationId: entrar
+      security: []
+      requestBody: { required: true, content: { application/json: { schema: { $ref: "#/components/schemas/Entrar" }, example: { identificador: otavio, senha: "<OCULTO>" } } } }
+      responses:
+        "201": { description: "Sessão criada; cookie `sessao` definido" }
+        "401": { description: "Usuário ou senha inválidos (mensagem única, não revela qual)", content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problema" } } } }
+        "422": { $ref: "#/components/responses/Invalido" }
+        "429": { description: "Bloqueado por 10 minutos (5 falhas por usuário ou 20 por IP)", content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problema" } } } }
+    delete:
+      tags: [Sessão]
+      summary: Sair
+      operationId: sair
+      responses: { "204": { description: Sessão encerrada } }
+  /senha/pedidos:
+    post:
+      tags: [Senha]
+      summary: Pedir link de redefinição
+      operationId: pedirRedefinicao
+      security: []
+      requestBody: { required: true, content: { application/json: { schema: { $ref: "#/components/schemas/PedidoSenha" } } } }
+      responses:
+        "202": { description: "Sempre a mesma mensagem, exista ou não a conta" }
+        "422": { $ref: "#/components/responses/Invalido" }
+  /senha/redefinicoes:
+    post:
+      tags: [Senha]
+      summary: Criar nova senha pelo link
+      operationId: redefinirSenha
+      security: []
+      requestBody: { required: true, content: { application/json: { schema: { $ref: "#/components/schemas/NovaSenha" } } } }
+      responses:
+        "200": { description: "Senha alterada; link consumido e sessões do usuário encerradas" }
+        "410": { description: "Link inválido, usado ou expirado (30 minutos)", content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problema" } } } }
+        "422": { description: "Senha fora das regras ou dados inválidos", content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problema" } } } }
+  /municipios:
+    get:
+      tags: [Estudo]
+      summary: Busca de município (até 10 resultados)
+      operationId: buscarMunicipios
+      parameters: [{ name: q, in: query, required: true, schema: { type: string, minLength: 2 }, example: joinvil }]
+      responses:
+        "200": { description: Lista, content: { application/json: { schema: { type: object, properties: { itens: { type: array, items: { $ref: "#/components/schemas/Municipio" } } } } } } }
+        "401": { $ref: "#/components/responses/NaoAutenticado" }
+  /rede:
+    get:
+      tags: [Estudo]
+      summary: Dados "Sobre a rede" das duas marcas
+      operationId: lerRede
+      responses:
+        "200": { description: Lista por marca }
+        "401": { $ref: "#/components/responses/NaoAutenticado" }
+  /rede/{marca}:
+    put:
+      tags: [Administração]
+      summary: Edita "Sobre a rede" de uma marca (administrador)
+      operationId: editarRede
+      parameters: [{ name: marca, in: path, required: true, schema: { type: string, enum: [auto-visao, royal] } }]
+      requestBody: { required: true, content: { application/json: { schema: { $ref: "#/components/schemas/Rede" } } } }
+      responses:
+        "200": { description: Salvo }
+        "401": { $ref: "#/components/responses/NaoAutenticado" }
+        "403": { $ref: "#/components/responses/Proibido" }
+        "404": { description: Marca não encontrada }
+        "422": { $ref: "#/components/responses/Invalido" }
+  /relatorios:
+    post:
+      tags: [Estudo]
+      summary: Gera o relatório em PDF A4 (ou PNG da 1ª página) — nada é guardado
+      operationId: gerarRelatorio
+      parameters: [{ name: formato, in: query, schema: { type: string, enum: [pdf, png], default: pdf } }]
+      requestBody: { required: true, content: { application/json: { schema: { $ref: "#/components/schemas/Estudo" } } } }
+      responses:
+        "200": { description: "Arquivo `estudo-<código>.pdf|png`", content: { application/pdf: {}, image/png: {} } }
+        "401": { $ref: "#/components/responses/NaoAutenticado" }
+        "422": { description: "Dados inválidos ou PDF bloqueado (Home Based sem laudos; DRE ligado sem laudos)", content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problema" } } } }
+  /relatorios/previa:
+    post:
+      tags: [Estudo]
+      summary: Prévia ao vivo — o mesmo HTML do PDF, exibido num iframe sem scripts
+      operationId: previaRelatorio
+      requestBody: { required: true, content: { application/json: { schema: { $ref: "#/components/schemas/Estudo" } } } }
+      responses:
+        "200": { description: HTML, content: { text/html: {} } }
+        "401": { $ref: "#/components/responses/NaoAutenticado" }
+        "422": { $ref: "#/components/responses/Invalido" }
+  /usuarios:
+    get:
+      tags: [Administração]
+      summary: Lista usuários (administrador)
+      operationId: listarUsuarios
+      responses: { "200": { description: Lista }, "403": { $ref: "#/components/responses/Proibido" } }
+    post:
+      tags: [Administração]
+      summary: Cria usuário (administrador)
+      operationId: criarUsuario
+      requestBody: { required: true, content: { application/json: { schema: { type: object, required: [nome, usuario, email, senha], properties: { nome: { type: string, maxLength: 120 }, usuario: { type: string, pattern: "^[a-z0-9._-]{3,40}$" }, email: { type: string, format: email }, senha: { type: string, maxLength: 128 } } } } } }
+      responses:
+        "201": { description: Criado }
+        "403": { $ref: "#/components/responses/Proibido" }
+        "409": { description: Usuário ou e-mail já cadastrado }
+        "422": { $ref: "#/components/responses/Invalido" }
+  /usuarios/{id}:
+    patch:
+      tags: [Administração]
+      summary: Desativa/reativa ou redefine a senha (administrador)
+      operationId: alterarUsuario
+      parameters: [{ name: id, in: path, required: true, schema: { type: string, format: uuid } }]
+      requestBody: { required: true, content: { application/json: { schema: { type: object, properties: { ativo: { type: boolean }, senha: { type: string, maxLength: 128 } } } } } }
+      responses:
+        "200": { description: OK }
+        "403": { $ref: "#/components/responses/Proibido" }
+        "409": { description: Não é possível desativar a própria conta }
+        "422": { $ref: "#/components/responses/Invalido" }

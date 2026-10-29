@@ -1,0 +1,9 @@
+# Só para desenvolvimento local. Nesta máquina o Docker roda sem rede bridge, por isso network_mode: host.
+services:
+  db:
+    image: postgres:17-alpine
+    container_name: estudo-praca-db
+    network_mode: host
+    environment: { POSTGRES_USER: estudo, POSTGRES_DB: estudo_praca, PGPORT: "5433", POSTGRES_PASSWORD: "${POSTGRES_PASSWORD}" }
+    volumes: [estudo_praca_pg:/var/lib/postgresql/data]
+volumes: { estudo_praca_pg: {} }

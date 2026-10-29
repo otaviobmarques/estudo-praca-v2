@@ -1,0 +1,49 @@
+OK   sem sessão a API recusa
+OK   sem sessão o PDF recusa
+OK   login correto
+OK   busca de município
+OK   PDF auto-visao full dre=1
+OK     3 páginas
+OK     EBITDA R$ 38.783,80
+OK     margem 64,35%
+OK     não cita a outra marca
+OK   PDF auto-visao full dre=0
+OK     2 páginas
+OK     não cita a outra marca
+OK   PDF auto-visao home_based dre=0
+OK     2 páginas
+OK     sem DETRAN/credenciamento/ECV
+OK     faturamento 200 × R$ 280
+OK     não cita a outra marca
+OK   PDF auto-visao home_based dre=1
+OK     3 páginas
+OK     sem DETRAN/credenciamento/ECV
+OK     faturamento 200 × R$ 280
+OK     não cita a outra marca
+OK   PDF royal full dre=1
+OK     3 páginas
+OK     EBITDA R$ 38.783,80
+OK     margem 64,35%
+OK     não cita a outra marca
+OK   PDF royal full dre=0
+OK     2 páginas
+OK     não cita a outra marca
+OK   PDF royal home_based dre=0
+OK     2 páginas
+OK     sem DETRAN/credenciamento/ECV
+OK     faturamento 200 × R$ 280
+OK     não cita a outra marca
+OK   PDF royal home_based dre=1
+OK     3 páginas
+OK     sem DETRAN/credenciamento/ECV
+OK     faturamento 200 × R$ 280
+OK     não cita a outra marca
+OK   Home Based sem laudos bloqueia o PDF
+OK   prévia em PNG
+OK   administrador salva Sobre a rede (mesmos valores)
+OK   Sobre a rede sem sessão é recusado
+OK   esqueci a senha: resposta igual para e-mail inexistente
+OK   link inválido recusado
+OK   5ª senha errada bloqueia
+OK   bloqueado mesmo com a senha certa (10 min)
+falhas: 0

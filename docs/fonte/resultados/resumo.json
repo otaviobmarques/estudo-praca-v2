@@ -1,0 +1,118 @@
+{
+ "auto-visao_full_sem-dre": [
+  {
+   "pagina": 1,
+   "pixels_diferentes_pct": 0.5,
+   "imagem": "docs/comparacao/comparacao_auto-visao_full_sem-dre_p1.png"
+  },
+  {
+   "pagina": 2,
+   "pixels_diferentes_pct": 0.3,
+   "imagem": "docs/comparacao/comparacao_auto-visao_full_sem-dre_p2.png"
+  }
+ ],
+ "auto-visao_full_com-dre": [
+  {
+   "pagina": 1,
+   "pixels_diferentes_pct": 0.5,
+   "imagem": "docs/comparacao/comparacao_auto-visao_full_com-dre_p1.png"
+  },
+  {
+   "pagina": 2,
+   "pixels_diferentes_pct": 0.6,
+   "imagem": "docs/comparacao/comparacao_auto-visao_full_com-dre_p2.png"
+  },
+  {
+   "pagina": 3,
+   "pixels_diferentes_pct": 0.3,
+   "imagem": "docs/comparacao/comparacao_auto-visao_full_com-dre_p3.png"
+  }
+ ],
+ "auto-visao_home-based_sem-dre": [
+  {
+   "pagina": 1,
+   "pixels_diferentes_pct": 1.0,
+   "imagem": "docs/comparacao/comparacao_auto-visao_home-based_sem-dre_p1.png"
+  },
+  {
+   "pagina": 2,
+   "pixels_diferentes_pct": 1.1,
+   "imagem": "docs/comparacao/comparacao_auto-visao_home-based_sem-dre_p2.png"
+  }
+ ],
+ "auto-visao_home-based_com-dre": [
+  {
+   "pagina": 1,
+   "pixels_diferentes_pct": null,
+   "imagem": "docs/comparacao/comparacao_auto-visao_home-based_com-dre_p1.png"
+  },
+  {
+   "pagina": 2,
+   "pixels_diferentes_pct": null,
+   "imagem": "docs/comparacao/comparacao_auto-visao_home-based_com-dre_p2.png"
+  },
+  {
+   "pagina": 3,
+   "pixels_diferentes_pct": null,
+   "imagem": "docs/comparacao/comparacao_auto-visao_home-based_com-dre_p3.png"
+  }
+ ],
+ "royal_full_sem-dre": [
+  {
+   "pagina": 1,
+   "pixels_diferentes_pct": 0.4,
+   "imagem": "docs/comparacao/comparacao_royal_full_sem-dre_p1.png"
+  },
+  {
+   "pagina": 2,
+   "pixels_diferentes_pct": 0.3,
+   "imagem": "docs/comparacao/comparacao_royal_full_sem-dre_p2.png"
+  }
+ ],
+ "royal_full_com-dre": [
+  {
+   "pagina": 1,
+   "pixels_diferentes_pct": 0.4,
+   "imagem": "docs/comparacao/comparacao_royal_full_com-dre_p1.png"
+  },
+  {
+   "pagina": 2,
+   "pixels_diferentes_pct": 0.6,
+   "imagem": "docs/comparacao/comparacao_royal_full_com-dre_p2.png"
+  },
+  {
+   "pagina": 3,
+   "pixels_diferentes_pct": 0.3,
+   "imagem": "docs/comparacao/comparacao_royal_full_com-dre_p3.png"
+  }
+ ],
+ "royal_home-based_sem-dre": [
+  {
+   "pagina": 1,
+   "pixels_diferentes_pct": 0.9,
+   "imagem": "docs/comparacao/comparacao_royal_home-based_sem-dre_p1.png"
+  },
+  {
+   "pagina": 2,
+   "pixels_diferentes_pct": 1.2,
+   "imagem": "docs/comparacao/comparacao_royal_home-based_sem-dre_p2.png"
+  }
+ ],
+ "royal_home-based_com-dre": [
+  {
+   "pagina": 1,
+   "pixels_diferentes_pct": null,
+   "imagem": "docs/comparacao/comparacao_royal_home-based_com-dre_p1.png"
+  },
+  {
+   "pagina": 2,
+   "pixels_diferentes_pct": null,
+   "imagem": "docs/comparacao/comparacao_royal_home-based_com-dre_p2.png"
+  },
+  {
+   "pagina": 3,
+   "pixels_diferentes_pct": null,
+   "imagem": "docs/comparacao/comparacao_royal_home-based_com-dre_p3.png"
+  }
+ ]
+}

@@ -1,0 +1,12 @@
+{
+ "auto-visao_full_dre-off": 2.3,
+ "auto-visao_full_dre-ok": 7.6,
+ "auto-visao_full_dre-vazio": 2.0,
+ "auto-visao_home-based_preenchido": 0.9,
+ "auto-visao_home-based_vazio": 1.2,
+ "royal_full_dre-off": 1.6,
+ "royal_full_dre-ok": 7.7,
+ "royal_full_dre-vazio": 1.9,
+ "royal_home-based_preenchido": 1.7,
+ "royal_home-based_vazio": 1.2
+}

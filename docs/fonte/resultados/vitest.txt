@@ -1,0 +1,74 @@
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - ESM syntax in a file loaded as CommonJS (vitest.config.ts:1:1). Use a `.mjs` extension or set `"type": "module"` in the closest package.json
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+ RUN  v5.0.5 /home/box/domma/estudo-praca-v2
+
+ ✓ tests/calculo.test.ts > Potencial da cidade — Joinville do exemplo (frota 498.378) > compatível com o site atual (2%, 100% Detran, R$ 240) 2ms
+ ✓ tests/calculo.test.ts > Potencial da cidade — Joinville do exemplo (frota 498.378) > cenário 1.5% 7476 (escopo 7.5) 0ms
+ ✓ tests/calculo.test.ts > Potencial da cidade — Joinville do exemplo (frota 498.378) > cenário 2% 9968 (escopo 7.5) 0ms
+ ✓ tests/calculo.test.ts > Potencial da cidade — Joinville do exemplo (frota 498.378) > cenário 2.5% 12459 (escopo 7.5) 0ms
+ ✓ tests/calculo.test.ts > Potencial da cidade — Joinville do exemplo (frota 498.378) > indicadores por ECV só com ECVs > 0 0ms
+ ✓ tests/calculo.test.ts > Potencial da cidade — Joinville do exemplo (frota 498.378) > recusa percentual fora da faixa 1ms
+ ✓ tests/calculo.test.ts > DRE — reprodução do xlsx (teste A, royalties 0, ticket cautelar 250, pessoas do xlsx) > coluna D 1ms
+ ✓ tests/calculo.test.ts > DRE — reprodução do xlsx (teste A, royalties 0, ticket cautelar 250, pessoas do xlsx) > coluna E 0ms
+ ✓ tests/calculo.test.ts > DRE — reprodução do xlsx (teste A, royalties 0, ticket cautelar 250, pessoas do xlsx) > coluna F 0ms
+ ✓ tests/calculo.test.ts > DRE — reprodução do xlsx (teste A, royalties 0, ticket cautelar 250, pessoas do xlsx) > coluna G 0ms
+ ✓ tests/calculo.test.ts > DRE — reprodução do xlsx (teste A, royalties 0, ticket cautelar 250, pessoas do xlsx) > coluna H 0ms
+ ✓ tests/calculo.test.ts > DRE — reprodução do xlsx (teste A, royalties 0, ticket cautelar 250, pessoas do xlsx) > coluna I 0ms
+ ✓ tests/calculo.test.ts > DRE — reprodução do xlsx (teste A, royalties 0, ticket cautelar 250, pessoas do xlsx) > coluna J 0ms
+ ✓ tests/calculo.test.ts > DRE — reprodução do xlsx (teste A, royalties 0, ticket cautelar 250, pessoas do xlsx) > coluna K 0ms
+ ✓ tests/calculo.test.ts > DRE — reprodução do xlsx (teste A, royalties 0, ticket cautelar 250, pessoas do xlsx) > coluna L 1ms
+ ✓ tests/calculo.test.ts > DRE — reprodução do xlsx (teste A, royalties 0, ticket cautelar 250, pessoas do xlsx) > coluna M 0ms
+ ✓ tests/calculo.test.ts > DRE — regra de pessoal (teste B) e royalties (teste C) > coluna D 0ms
+ ✓ tests/calculo.test.ts > DRE — regra de pessoal (teste B) e royalties (teste C) > coluna H 0ms
+ ✓ tests/calculo.test.ts > DRE — regra de pessoal (teste B) e royalties (teste C) > coluna M 0ms
+ ✓ tests/calculo.test.ts > DRE — exemplo de Joinville com 400 laudos (aceite) > divide 360/40 0ms
+ ✓ tests/calculo.test.ts > DRE — exemplo de Joinville com 400 laudos (aceite) > receita bruta R$ 64.120,00 0ms
+ ✓ tests/calculo.test.ts > DRE — exemplo de Joinville com 400 laudos (aceite) > impostos e receita líquida 0ms
+ ✓ tests/calculo.test.ts > DRE — exemplo de Joinville com 400 laudos (aceite) > CV total, pessoal e despesas 0ms
+ ✓ tests/calculo.test.ts > DRE — exemplo de Joinville com 400 laudos (aceite) > EBITDA R$ 38.783,80 e margem 64,35% sobre a receita líquida 12ms
+ ✓ tests/calculo.test.ts > DRE — exemplo de Joinville com 400 laudos (aceite) > tem as linhas do modelo mais royalties 0ms
+ ✓ tests/calculo.test.ts > Home Based > volume vem do campo, não da frota 0ms
+ ✓ tests/calculo.test.ts > Home Based > campo vazio gera alerta 0ms
+ ✓ tests/calculo.test.ts > Home Based > fora da faixa 180–250 só sinaliza 0ms
+ ✓ tests/calculo.test.ts > Oferta > padrões fecham nos dois modelos 0ms
+ ✓ tests/calculo.test.ts > Oferta > alerta quando a conta não fecha (18 parcelas) 0ms
+ ✓ tests/calculo.test.ts > Oferta > sem parcelamento compara entrada e valor 0ms
+ ✓ tests/calculo.test.ts > Código do estudo > formato e horário de Brasília 7ms
+ ✓ tests/calculo.test.ts > DRE do Home Based > despesas que não se aplicam começam zeradas; as demais seguem a planilha 1ms
+ ✓ tests/calculo.test.ts > DRE do Home Based > 200 laudos × R$ 280 com os padrões do Home Based 0ms
+ ✓ tests/calculo.test.ts > DRE do Home Based > todas as despesas são editáveis no estudo 0ms
+ ✓ tests/calculo.test.ts > Marketing do Home Based (decisão v2.0) > começa zerado e, preenchido, entra como valor mensal 0ms
+ ✓ tests/calculo.test.ts > Marketing do Home Based (decisão v2.0) > no Full o marketing continua por vistoria Detran e ignora o valor mensal 0ms
+ ✓ tests/relatorio.test.ts > Relatório auto-visao (modelos da Julia) > Full sem DRE: 2 páginas, números do exemplo 20ms
+ ✓ tests/relatorio.test.ts > Relatório auto-visao (modelos da Julia) > Full com DRE: 3 páginas, R$ 64.120,00 / R$ 38.783,80 / 64,35% 9ms
+ ✓ tests/relatorio.test.ts > Relatório auto-visao (modelos da Julia) > Home Based sem DRE: 2 páginas, sem DETRAN/credenciamento/ECV 9ms
+ ✓ tests/relatorio.test.ts > Relatório auto-visao (modelos da Julia) > Home Based com DRE: 3 páginas, receita = laudos × preço, sem DETRAN/ECV 7ms
+ ✓ tests/relatorio.test.ts > Relatório auto-visao (modelos da Julia) > aviso fixo (mesmo texto nos dois modelos) em todas as páginas 18ms
+ ✓ tests/relatorio.test.ts > Relatório auto-visao (modelos da Julia) > sem parcelamento a linha de parcelas some e a grade vira de 2 4ms
+ ✓ tests/relatorio.test.ts > Relatório auto-visao (modelos da Julia) > cidade real: sem marcas de EXEMPLO e com escape de HTML 6ms
+ ✓ tests/relatorio.test.ts > Relatório auto-visao (modelos da Julia) > identificador lateral com código e usuário em todas as páginas 5ms
+ ✓ tests/relatorio.test.ts > Relatório royal (modelos da Julia) > Full sem DRE: 2 páginas, números do exemplo 6ms
+ ✓ tests/relatorio.test.ts > Relatório royal (modelos da Julia) > Full com DRE: 3 páginas, R$ 64.120,00 / R$ 38.783,80 / 64,35% 6ms
+ ✓ tests/relatorio.test.ts > Relatório royal (modelos da Julia) > Home Based sem DRE: 2 páginas, sem DETRAN/credenciamento/ECV 5ms
+ ✓ tests/relatorio.test.ts > Relatório royal (modelos da Julia) > Home Based com DRE: 3 páginas, receita = laudos × preço, sem DETRAN/ECV 8ms
+ ✓ tests/relatorio.test.ts > Relatório royal (modelos da Julia) > aviso fixo (mesmo texto nos dois modelos) em todas as páginas 15ms
+ ✓ tests/relatorio.test.ts > Relatório royal (modelos da Julia) > sem parcelamento a linha de parcelas some e a grade vira de 2 5ms
+ ✓ tests/relatorio.test.ts > Relatório royal (modelos da Julia) > cidade real: sem marcas de EXEMPLO e com escape de HTML 5ms
+ ✓ tests/relatorio.test.ts > Relatório royal (modelos da Julia) > identificador lateral com código e usuário em todas as páginas 5ms
+ ✓ tests/relatorio.test.ts > Bloqueios > Home Based sem laudos bloqueia (com ou sem DRE) 0ms
+ ✓ tests/relatorio.test.ts > Bloqueios > Full com DRE e sem laudos da unidade bloqueia 1ms
+ ✓ tests/relatorio.test.ts > Sobre a rede (validação do administrador) > destaque vazio vira nulo 2ms
+ ✓ tests/relatorio.test.ts > Sobre a rede (validação do administrador) > recusa campos vazios e textos longos 0ms
+ ✓ tests/relatorio.test.ts > Regras da nova senha > Expansao / Expansao → false 0ms
+ ✓ tests/relatorio.test.ts > Regras da nova senha > expansao1 / expansao1 → false 0ms
+ ✓ tests/relatorio.test.ts > Regras da nova senha > Expansao1 / Expansao2 → false 0ms
+ ✓ tests/relatorio.test.ts > Regras da nova senha > Exp1 / Exp1 → false 0ms
+ ✓ tests/relatorio.test.ts > Regras da nova senha > Expansao1 / Expansao1 → true 0ms
+
+ Test Files  2 passed (2)
+      Tests  62 passed (62)
+   Start at  01:12:43
+   Duration  456ms (import 46%, tests 40%, transform 12%, worker 1%)
+

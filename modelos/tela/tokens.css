@@ -1,0 +1,49 @@
+/* Tokens do Gerador de Estudo de Praça — troca de marca por [data-marca] no <html> */
+:root{
+  --esp-1:4px;--esp-2:8px;--esp-3:12px;--esp-4:16px;--esp-5:24px;--esp-6:32px;--esp-7:48px;
+  --raio-campo:10px;--raio-cartao:16px;--raio-botao:999px;
+  --painel-largura:440px;
+  --ok:#1E7B45;--erro:#B3261E;
+}
+[data-marca="auto-visao"]{
+  /* Guia "Ilustrações Auto Visão" v1.0 (out/2026) + manual oficial 1.1 — v1.5
+     WCAG: branco/#C9232C 5,3:1 (botões e texto pequeno) · branco/#ED3237 4,0:1 (só texto grande ≥18,66px bold) · #C9232C/#FFFFFF 5,3:1 · #696267/#FFFFFF 6,0:1 */
+  --cor-primaria:#ED3237;          /* vermelho marca: faixas, ícones, destaques grandes */
+  --cor-primaria-forte:#C9232C;    /* vermelho ação: botões, texto vermelho */
+  --cor-escura:#151415;
+  --cor-fundo:#F6F4F5;
+  --cor-superficie:#FFFFFF;
+  --cor-texto:#151415;
+  --cor-texto-suave:#696267;
+  --cor-borda:#DED8DC;
+  --cor-realce-suave:#FBE9EA;
+  --cor-sobre-escura:#FFFFFF;
+  --cor-sobre-primaria:#FFFFFF;
+  --cor-botao:#C9232C; --cor-sobre-botao:#FFFFFF;
+  --fonte-titulo:"Nunito",sans-serif; --peso-titulo:900;
+  --fonte-numero:"Nunito",sans-serif;
+  --fonte-texto:"Inter",sans-serif;
+  --caixa-titulo:none;
+}
+[data-marca="royal"]{
+  /* Guia "Direção Visual Royal Vistorias" v1.0 (27 p.) + Royal DS v1.0 — v1.5
+     WCAG: #101419/#F7F3E2 16,6:1 · #101419/#ED712F 6,4:1 · #A54413/#F7F3E2 5,9:1 (link/foco/texto de destaque) · #575B62/#FFFFFF 6,9:1 · laranja/creme 2,6:1 (proibido p/ texto) */
+  --cor-primaria:#ED712F;          /* ação e destaque (fundo com texto preto, ou sobre preto) */
+  --cor-primaria-forte:#A54413;    /* --link do guia: texto de destaque em fundo claro */
+  --cor-escura:#101419;
+  --cor-fundo:#F7F3E2;
+  --cor-superficie:#FFFFFF;
+  --cor-texto:#101419;
+  --cor-texto-suave:#575B62;
+  --cor-borda:#D9D4C2;
+  --cor-realce-suave:#EEEBDF;
+  --cor-sobre-escura:#F7F3E2;
+  --cor-sobre-primaria:#101419;
+  --cor-botao:#ED712F; --cor-sobre-botao:#101419;
+  --fonte-titulo:"Raleway",sans-serif; --peso-titulo:900;
+  --fonte-numero:"Raleway",sans-serif;
+  --fonte-texto:"Inter",sans-serif;
+  --caixa-titulo:uppercase;
+  --raio-cartao:10px; --raio-campo:0; --raio-botao:0;
+  --chanfro:polygon(8px 0,100% 0,100% calc(100% - 8px),calc(100% - 8px) 100%,0 100%,0 8px);
+}
