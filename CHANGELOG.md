@@ -1,9 +1,12 @@
 # Registro de mudanças
 ## [Não lançado]
 ### Alterado
+- Oferta do Full: texto padrão "Entrada inclui:" com a lista Kit de Câmeras e Biometria homologados pelo DETRAN · Projeto Arquitetônico · 2 Vagas de Treinamento · Sistema e App de Laudos (pedido do Otávio). Texto de várias linhas sai em lista no PDF e na tela.
+- Removidas do relatório as notas internas do modelo ("população e frota de Joinville são valores de EXEMPLO herdados do sistema atual…" e "Condição comercial como digitada no painel…"), também no Exemplo Joinville, e o título "Leitura do estudo", que ficou sem conteúdo.
 - Tela principal mais compacta (botões, campos, títulos, cartões e painel menores) e Administração refeita com o mesmo design system da tela (cabeçalho, blocos, campos, botões e selos; redefinição de senha em linha, sem janela do navegador).
 - Removidos os textos provisórios "[REVISAR – OTÁVIO]" e "[VERIFICAR]" dos modelos do relatório e da tela (decisão do Otávio; pendência C7). O aviso fixo aprovado continua em todas as páginas.
 ### Corrigido
+- Página de contatos: vão grande entre o título da seção e o contato de expansão.
 - Fontes: Inter, Nunito e Raleway passam a ser servidas pelo próprio sistema (`public/fontes`, licença OFL) em todas as telas e embutidas no PDF; antes cada computador usava a fonte que tivesse instalada. CSP com `font-src 'self' data:`.
 - Selos "EXEMPLO" dos cartões de população e frota e do DRE apareciam também em cidades reais.
 - Campo UF com duas setas.

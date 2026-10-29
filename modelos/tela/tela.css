@@ -178,6 +178,7 @@ body{font-size:13px}
 .faixa-cenario{font-size:13px;padding:8px 12px}
 .resultado b{font-size:22px}.rn b{font-size:22px}.rede{padding:var(--esp-4)}.rede-tit{font-size:19px}
 .oferta-num b{font-size:18px}
+#f-txt{height:118px}#r-txt .of-lista{margin:4px 0 0;padding-left:18px}
 .bloco{padding:var(--esp-4)}.bloco h3{font-size:15px}
 .cen th,.cen td{padding:7px 10px}
 .marca-dagua{font-size:140px}

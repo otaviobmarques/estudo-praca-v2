@@ -8,7 +8,7 @@ import { PADROES, padroesDre, calcularPotencial, calcularHomeBased, calcularDreM
 const ENTREGAVEIS_BASE = ["Suporte na abertura do CNPJ", "Treinamento", "Marketing", "Jurídico", "Sistema de montagem de laudos", "Suporte técnico", "Back office comercial"];
 const ENTREGAVEIS_FULL_EXTRA = ["Todo o processo de credenciamento no DETRAN", "Sistema ECV Vistoria DETRAN", "Câmeras e leitores de biometria em comodato, quando o DETRAN exigir"];
 const TEXTO: Record<Modelo, string> = {
-  full: "Entrada inclui kit de câmeras, biometria, projeto arquitetônico e 2 vagas de curso. Início na etapa posterior do credenciamento/liberação.",
+  full: "Entrada inclui:\nKit de Câmeras e Biometria homologados pelo DETRAN\nProjeto Arquitetônico\n2 Vagas de Treinamento\nSistema e App de Laudos",
   home_based: "10 parcelas sem juros. Atendimento móvel, sem ponto fixo.",
 };
 const ROTULO: Record<Modelo, string> = { full: "Franquia Full · Completa", home_based: "Franquia Home Based · Atendimento Móvel" };
@@ -82,7 +82,8 @@ export function iniciarPainel(opts: { admin: boolean }) {
     // oferta (v1.6): alerta só informativo
     const of = conferirOferta(e.oferta); $("g-parc").hidden = !e.oferta.parcelamento; $("r-parc-box").hidden = !e.oferta.parcelamento;
     $("r-taxa").textContent = brl(e.oferta.valorFranquia); $("r-ent").textContent = brl(e.oferta.entrada); $("r-parc").textContent = `${e.oferta.numeroParcelas} × ${brl(e.oferta.valorParcela)}`;
-    $("o-alerta").hidden = of.fecha; $("o-alerta-txt").textContent = of.alerta ?? ""; $("r-txt").textContent = e.oferta.texto ?? "";
+    $("o-alerta").hidden = of.fecha; $("o-alerta-txt").textContent = of.alerta ?? ""; { const l = (e.oferta.texto ?? "").split(/\r?\n/).map((x) => x.trim()).filter(Boolean);
+      $("r-txt").innerHTML = l.length > 1 ? `${esc(l[0])}<ul class="of-lista">${l.slice(1).map((x) => `<li>${esc(x)}</li>`).join("")}</ul>` : esc(l[0] ?? ""); }
     if (hb) {
       const r = calcularHomeBased({ laudosMes: e.laudosHomeBased, ticketCautelar: e.ticketCautelar }), tr = "—";
       $("hb-alerta").hidden = r.pronto; $("f-lhb-box").classList.toggle("erro", !r.pronto); $("f-lhb").setAttribute("aria-invalid", String(!r.pronto));

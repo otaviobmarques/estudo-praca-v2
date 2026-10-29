@@ -94,3 +94,25 @@ describe("Sem marcações de revisão (decisão do Otávio: remover os textos [R
     expect(fs.readFileSync("modelos/tela/painel.html", "utf8")).not.toMatch(/\[(REVISAR|VERIFICAR)/);
   });
 });
+
+describe("Oferta do Full: texto em lista (pedido do Otávio, 29/10/2026)", () => {
+  it.each(["auto-visao", "royal"] as const)("%s: abertura + 4 itens", (m) => {
+    const h = montarHtml(D(m, "full", false));
+    expect(h).toContain('<p class="of-abre">Entrada inclui:</p><ul class="of-lista"><li>Kit de Câmeras e Biometria homologados pelo DETRAN</li><li>Projeto Arquitetônico</li><li>2 Vagas de Treinamento</li><li>Sistema e App de Laudos</li></ul>');
+    expect(texto(h)).not.toMatch(/2 vagas de curso/);
+  });
+  it("texto de uma linha continua parágrafo simples, com escape", () => {
+    const h = montarHtml(D("royal", "full", false, { oferta: { valorFranquia: 30000, entrada: 10000, parcelamento: true, numeroParcelas: 20, valorParcela: 1000, texto: "Condição <especial>" } }));
+    expect(h).toContain("<p>Condição &lt;especial&gt;</p>");
+  });
+});
+
+describe("Sem notas internas no relatório (pedido do Otávio, 29/10/2026)", () => {
+  it.each(["auto-visao", "royal"] as const)("%s", (m) => {
+    for (const ex of [true, false]) for (const [mod, dre] of [["full", false], ["full", true], ["home_based", false], ["home_based", true]] as const)
+      expect(texto(montarHtml(D(m, mod, dre, { exemplo: ex })))).not.toMatch(/herdados do sistema atual|Condição comercial como digitada|formulário atual|Cenas marcadas/);
+  });
+});
+it("sem o título órfão 'Leitura do estudo' (o aviso fixo fica no rodapé)", () => {
+  for (const m of ["auto-visao", "royal"] as const) expect(texto(montarHtml(D(m, "full", true)))).not.toMatch(/Leitura do estudo/i);
+});

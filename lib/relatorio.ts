@@ -20,7 +20,7 @@ export const AVISO_FIXO = "Aviso importante: as projeções, estimativas de dema
 export const ENTREGAVEIS_BASE = ["Suporte na abertura do CNPJ", "Treinamento", "Marketing", "Jurídico", "Sistema de montagem de laudos", "Suporte técnico", "Back office comercial"];
 export const ENTREGAVEIS_FULL_EXTRA = ["Todo o processo de credenciamento no DETRAN", "Sistema ECV Vistoria DETRAN", "Câmeras e leitores de biometria em comodato, quando o DETRAN exigir"];
 export const TEXTO_OFERTA: Record<Modelo, string> = {
-  full: "Entrada inclui kit de câmeras, biometria, projeto arquitetônico e 2 vagas de curso. Início na etapa posterior do credenciamento/liberação.",
+  full: "Entrada inclui:\nKit de Câmeras e Biometria homologados pelo DETRAN\nProjeto Arquitetônico\n2 Vagas de Treinamento\nSistema e App de Laudos",
   home_based: "10 parcelas sem juros. Atendimento móvel, sem ponto fixo.",
 };
 const NOME_MARCA: Record<Marca, string> = { "auto-visao": "Auto Visão", royal: "Royal Vistorias" };
@@ -45,6 +45,10 @@ export function motivoBloqueio(d: Pick<DadosRelatorio, "modelo" | "laudosHomeBas
   return null;
 }
 
+/** Ajustes pedidos pelo Otávio (29/10/2026): contatos logo abaixo do título da seção, sem vão; oferta em lista. */
+const CSS_AJUSTES = `.contato{margin-top:0}
+.of-abre{margin-bottom:1mm}.of-lista{margin:0;padding-left:4.5mm}.of-lista li{margin:.4mm 0}`;
+
 /** Ajustes da página deitada do DRE (10 meses + total). Usa as cores e fontes de cada marca (estilo.css da Julia). */
 const CSS_DRE_MESES = `@page horizontal{size:A4 landscape;margin:0}
 .pag.pag-h{page:horizontal;width:297mm;height:210mm}
@@ -62,6 +66,14 @@ const CSS_DRE_MESES = `@page horizontal{size:A4 landscape;margin:0}
 .pag-h .res{padding:2.6mm 6mm;gap:4mm}.pag-h .res b{font-size:15pt}
 .pag-h .aviso{padding:2mm 4mm;font-size:7.5pt}
 .pag-h .mlogo{bottom:22mm;width:70mm}`;
+
+/** Texto da oferta: uma linha = parágrafo; várias linhas = a primeira abre e as demais viram lista. */
+function textoOferta(t?: string) {
+  const l = (t ?? "").split(/\r?\n/).map((x) => x.trim()).filter(Boolean);
+  if (!l.length) return "";
+  if (l.length === 1) return `<p>${esc(l[0])}</p>`;
+  return `<p class="of-abre">${esc(l[0])}</p><ul class="of-lista">${l.slice(1).map((x) => `<li>${esc(x)}</li>`).join("")}</ul>`;
+}
 
 // ---------- carga dos modelos ----------
 const RAIZ = path.join(process.cwd(), "modelos", "relatorio");
@@ -210,15 +222,16 @@ export function montarHtml(d: DadosRelatorio): string {
   const parc = d.oferta.parcelamento;
   pc = troca(pc, /<div class="of">[\s\S]*?<\/div><\/div>\s*<p>[^<]*<\/p>/, `<div class="of${parc ? "" : " of-2"}">
 <div><span>Taxa total</span><b>${R0(d.oferta.valorFranquia)}</b></div><div><span>Entrada</span><b>${R0(d.oferta.entrada)}</b></div>${parc ? `<div><span>Parcelas</span><b>${d.oferta.numeroParcelas} × ${R0(d.oferta.valorParcela)}</b></div>` : ""}</div>
-${d.oferta.texto?.trim() ? `<p>${esc(d.oferta.texto)}</p>` : ""}`);
-  pc = pc.replace(/<p class="prem" style="margin-top:2mm">Condição comercial[^<]*<\/p>/, `<p class="prem" style="margin-top:2mm">Condição comercial como digitada no painel${d.exemplo ? " (editável); valores padrão do formulário atual, usados como EXEMPLO" : ""}.</p>`);
+${textoOferta(d.oferta.texto)}`);
+  // notas internas do modelo da Julia não vão para o relatório (pedido do Otávio, 29/10/2026)
+  pc = pc.replace(/<p class="prem" style="margin-top:2mm">Condição comercial[^<]*<\/p>/, "");
   pc = troca(pc, /(<ul class="entreg">)[\s\S]*?(<\/ul>)/, `$1${[...ENTREGAVEIS_BASE, ...(hb ? [] : ENTREGAVEIS_FULL_EXTRA)].map((e) => `<li><i></i>${esc(e)}</li>`).join("")}$2`);
   pc = troca(pc, /(<table class="fontes"><thead>[\s\S]*?<\/thead><tbody>)[\s\S]*?(<\/tbody><\/table>)/, `$1
 <tr><td>Frota de veículos</td><td>Senatran — Frota por município e tipo</td><td>Setembro/2026</td></tr>
 <tr><td>População</td><td>IBGE — Estimativa da população 2025</td><td>1º/07/2025</td></tr>
 ${hb ? `${d.ecvs ? `<tr><td>Concorrentes (cautelar)</td><td>Informado pelo usuário</td><td>Data do estudo</td></tr>` : ""}<tr><td>Volume e preço do laudo</td><td>Informados no painel (editáveis)</td><td>${N(d.laudosHomeBased!)} laudos/mês · ${R0(d.ticketCautelar)}</td></tr>`
   : `<tr><td>ECVs concorrentes</td><td>${d.ecvs ? "Informado pelo usuário" : "Não informado (opcional)"}</td><td>Data do estudo</td></tr><tr><td>Tickets, divisão e cenário</td><td>Parâmetros do estudo (editáveis)</td><td>Detran ${R0(d.ticketDetran)} · cautelar ${R0(d.ticketCautelar)} · ${N(d.percentualDetran)}/${N(100 - d.percentualDetran)} · ${NOME_CEN[d.cenario]} ${N(d.percentuais[d.cenario])}%</td></tr>`}$2`);
-  if (!d.exemplo) pc = pc.replace(/<p class="prem">Neste modelo, população e frota[^<]*<\/p>/, "");
+  pc = pc.replace(/<p class="prem">Neste modelo, população e frota[^<]*<\/p>/, "");
   pags[total - 1] = pc;
 
   // numeração das seções
@@ -226,5 +239,5 @@ ${hb ? `${d.ecvs ? `<tr><td>Concorrentes (cautelar)</td><td>Informado pelo usuá
   pags = pags.map((p) => p.replace(/<div class="sec"><span>\d+<\/span>/g, () => `<div class="sec"><span>${++n}</span>`));
   if (hb) pags = pags.map((p) => p.replace(/<div class="sec"><span>(\d+)<\/span>DRE<\/div>/, '<div class="sec"><span>$1</span>DRE</div>'));
 
-  return `<!doctype html><html lang="pt-BR" data-marca="${d.marca}"><head><meta charset="utf-8"><title>Estudo de praça ${esc(d.cidade)}/${esc(d.uf)} · ${nomeMarca}</title><style>${estilo(d.marca)}${comDre ? CSS_DRE_MESES : ""}</style></head><body>${base.sprite}${hb && comDre ? "" : ""}${pags.join("")}</body></html>`;
+  return `<!doctype html><html lang="pt-BR" data-marca="${d.marca}"><head><meta charset="utf-8"><title>Estudo de praça ${esc(d.cidade)}/${esc(d.uf)} · ${nomeMarca}</title><style>${estilo(d.marca)}${CSS_AJUSTES}${comDre ? CSS_DRE_MESES : ""}</style></head><body>${base.sprite}${hb && comDre ? "" : ""}${pags.join("")}</body></html>`;
 }
