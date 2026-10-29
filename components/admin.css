@@ -22,8 +22,23 @@
 .adm-senha .entrada{width:320px;background:var(--cor-superficie)}
 .adm-msg{font-size:13px;font-weight:600;padding:8px 12px;border-radius:var(--raio-campo);background:var(--cor-superficie);border-left:4px solid var(--ok)}
 .adm-msg.erro{border-left-color:var(--erro)}
-.adm-redes{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:var(--esp-4)}
+.adm-redes{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(340px,100%),1fr));gap:var(--esp-4)}
 .adm-redes form{display:flex;flex-direction:column;gap:var(--esp-3)}
 .adm-redes h4{font:800 15px var(--fonte-titulo);text-transform:var(--caixa-titulo)}
 .adm-redes .msg{font-size:12.5px;color:var(--cor-texto-suave);min-height:1em}
 @media (max-width:900px){.adm-form{grid-template-columns:1fr 1fr}.adm .topo .base{display:none}}
+/* celular (29/10/2026): tabela de usuários vira cartões; formulários em uma coluna */
+@media (max-width:700px){
+.adm .topo{height:auto;min-height:52px;flex-wrap:wrap;gap:var(--esp-2) var(--esp-3);padding:var(--esp-2) var(--esp-4)}
+.adm .topo img{height:24px}.adm .topo h1{font-size:14px;flex:1;min-width:0;white-space:normal}
+.adm-corpo{padding:var(--esp-3)}.adm-cab h2{font-size:22px}
+.adm table.cen,.adm table.cen tbody{display:block}.adm table.cen thead{display:none}
+.adm table.cen tr{display:grid;grid-template-columns:1fr 1fr;gap:6px 12px;padding:var(--esp-3) 0;border-bottom:1px solid var(--cor-borda)}
+.adm table.cen td{border:0;padding:0;font-size:13px;overflow-wrap:anywhere}
+.adm table.cen td[data-rot]::before{content:attr(data-rot);display:block;font-size:11px;font-weight:700;color:var(--cor-texto-suave)}
+.adm table.cen td[data-rot="E-mail"]{grid-column:1/-1}
+.adm table.cen .adm-acoes{grid-column:1/-1;text-align:left;display:flex;gap:var(--esp-2);flex-wrap:wrap}.adm .adm-acoes .btn+.btn{margin-left:0}
+.adm-senha .linha-senha{flex-direction:column;align-items:stretch}.adm-senha .entrada{width:100%}
+.adm-form{grid-template-columns:1fr}
+.adm input{font-size:16px}
+}

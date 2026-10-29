@@ -8,7 +8,7 @@
     <div class="base"><svg class="ic"><use href="#ic-fonte-dados"/></svg>Base: Senatran set/2026 · IBGE Estimativa 2025 · Parâmetros v1.0</div><nav class="conta"><a id="l-admin" href="/admin" hidden>Administração</a><a id="l-sair" href="/entrar">Sair</a></nav>
   </header>
 
-  <aside class="painel" aria-label="Preenchimento do estudo">
+  <aside class="painel" id="painel" aria-label="Preenchimento do estudo">
     <div class="acoes">
       <button class="btn btn-secundario" id="b-exemplo"><svg class="ic"><use href="#ic-exemplo"/></svg>Exemplo Joinville</button>
       <button class="btn btn-secundario" id="b-limpar"><svg class="ic"><use href="#ic-limpar"/></svg>Limpar</button>
@@ -119,7 +119,7 @@
     </section>
   </aside>
 
-  <main class="relatorio" aria-live="polite">
+  <main class="relatorio" id="relatorio" aria-live="polite">
     <div class="marca-dagua" id="r-marca-dagua">EXEMPLO</div>
     <div class="cab">
       <div><div class="sobre">Estudo de potencial da praça</div><span class="modelo-capa" id="r-modelo">Franquia Full · Completa</span><h2 id="r-cidade">Joinville <span>/ SC</span></h2><div class="base-capa">Base: Senatran set/2026 · IBGE Estimativa 2025 · Parâmetros v1.0</div></div>
@@ -179,4 +179,5 @@
     <p class="nota ref"><svg class="ic"><use href="#ic-aviso"/></svg><span>Aviso importante: as projeções, estimativas de demanda e o DRE apresentados neste estudo são apenas referenciais. Eles foram calculados com dados públicos (Senatran e IBGE) e com premissas médias, que podem variar de cidade para cidade e conforme a gestão, o ponto comercial, a concorrência e as condições de mercado. Este material não é promessa nem garantia de faturamento, lucro ou retorno do investimento, e não substitui a análise própria do candidato a franqueado.</span></p>
     <p class="nota"><svg class="ic"><use href="#ic-aviso"/></svg><span>Fontes: Senatran, frota por município e tipo (setembro/2026); IBGE, Estimativa da população 2025 (referência 1º/07/2025).</span></p>
   </main>
+  <nav class="barra-celular" aria-label="Navegação no celular"><a href="#painel">Dados</a><a href="#relatorio">Relatório</a><button type="button" class="btn btn-principal" id="b-pdf-cel"><svg class="ic"><use href="#ic-baixar-pdf"/></svg>PDF</button></nav>
 </div>

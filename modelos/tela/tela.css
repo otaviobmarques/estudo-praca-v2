@@ -184,3 +184,26 @@ body{font-size:13px}
 .bloco{padding:var(--esp-4)}.bloco h3{font-size:15px}
 .cen th,.cen td{padding:7px 10px}
 .marca-dagua{font-size:140px}
+
+/* ---- celular e tablet (29/10/2026) ---- */
+.barra-celular{display:none}
+@media (max-width:900px){
+.app{grid-template-columns:1fr;grid-template-rows:auto auto auto;padding-bottom:64px}
+.topo{height:auto;min-height:52px;flex-wrap:wrap;gap:var(--esp-2) var(--esp-3);padding:var(--esp-2) var(--esp-4)}
+.topo img{height:24px}.topo h1{font-size:14px;flex:1;min-width:0}.topo .base{display:none}.conta{gap:12px}
+.painel{border-right:0;border-bottom:1px solid var(--cor-borda);padding:var(--esp-4)}
+.relatorio{padding:var(--esp-4);gap:var(--esp-3)}
+.cab{flex-direction:column;align-items:flex-start}.cab h2{font-size:24px}
+.grade{grid-template-columns:1fr 1fr;gap:var(--esp-2)}.cartao{padding:var(--esp-3)}.cartao .val,.grade .cartao .val{font-size:19px}
+.duas,.rede{grid-template-columns:1fr}.rede{gap:var(--esp-3)}
+.bloco{overflow-x:auto}.oferta-num{grid-auto-flow:row;grid-template-columns:1fr 1fr}
+.resultado{flex-wrap:wrap;gap:var(--esp-2)}
+.marca-dagua{font-size:90px}
+.entrada input,.entrada select,textarea,.meses-dre-tab input{font-size:16px}
+.lista-busca li{padding:12px 10px}
+.barra-celular{display:grid;grid-template-columns:1fr 1fr 1fr;gap:var(--esp-2);position:fixed;left:0;right:0;bottom:0;z-index:30;padding:var(--esp-2) var(--esp-3) calc(var(--esp-2) + env(safe-area-inset-bottom));background:var(--cor-escura);box-shadow:0 -4px 16px rgba(0,0,0,.18)}
+.barra-celular a{display:flex;align-items:center;justify-content:center;height:40px;border-radius:var(--raio-botao);border:1.5px solid rgba(255,255,255,.35);color:var(--cor-sobre-escura);font:700 13px var(--fonte-texto);text-decoration:none}
+.barra-celular .btn{height:40px}
+#painel,#relatorio{scroll-margin-top:8px}
+}
+@media (max-width:420px){.linha.tres{grid-template-columns:1fr 1fr 1fr}.seletor-modelo button span{font-size:10.5px}}

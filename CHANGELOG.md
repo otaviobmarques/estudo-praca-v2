@@ -1,4 +1,7 @@
 # Registro de mudanças
+## [Não lançado — celular e PWA]
+### Adicionado
+- **Versão para celular e tablet** (até 900 px): dados em cima e relatório embaixo, barra fixa com Dados, Relatório e PDF, cartões em 2 colunas, tabelas com rolagem dentro do bloco, campos de 16 px (sem zoom no iPhone). Administração com usuários em cartões e formulários em uma coluna; login sem rolagem lateral. `scripts/tela_celular.py`, usado por `montar_tela.py`.
 ## [Não lançado]
 ### Alterado
 - "Oferta de franquia" passa a se chamar "Proposta comercial" (PDF, prévia e painel) e ganha destaque: fundo escuro da marca com os valores em vermelho (Auto Visão) ou laranja (Royal), como o quadro de resultado do DRE (pedido do Otávio).

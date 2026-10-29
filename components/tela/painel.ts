@@ -132,7 +132,7 @@ export function iniciarPainel(opts: { admin: boolean }) {
     }
     // bloqueio do PDF/PNG
     const motivo = !e.cidade ? "Escolha a cidade" : hb && !e.laudosHomeBased ? "Preencha os laudos/mês do Home Based" : faltaFull ? "Preencha os laudos dos 10 meses ou desligue o DRE" : "";
-    for (const b of ["b-pdf", "b-png"]) { ($(b) as unknown as HTMLButtonElement).disabled = !!motivo; $(b).title = motivo; }
+    for (const b of ["b-pdf", "b-png", "b-pdf-cel"]) { ($(b) as unknown as HTMLButtonElement).disabled = !!motivo; $(b).title = motivo; }
   }
 
   function modelo(m: Modelo) {
@@ -185,7 +185,7 @@ export function iniciarPainel(opts: { admin: boolean }) {
       a.href = url; a.download = r.headers.get("content-disposition")?.match(/filename="(.+)"/)?.[1] ?? `estudo.${formato}`; a.click(); URL.revokeObjectURL(url);
     } finally { b.disabled = false; render(); }
   }
-  $("b-pdf").onclick = () => baixar("pdf"); $("b-png").onclick = () => baixar("png");
+  $("b-pdf").onclick = () => baixar("pdf"); $("b-pdf-cel").onclick = () => $("b-pdf").click(); // barra do celular $("b-png").onclick = () => baixar("png");
 
   fetch("/api/v1/rede").then((r) => r.json()).then((d) => { REDE = Object.fromEntries((d.itens ?? []).map((x: Rede) => [x.marca, x])); renderRede(); });
   definirCidade(null); padroesEstudo(); $("f-ecv").value = ""; modelo("full"); marca("auto-visao"); cenario(1);
