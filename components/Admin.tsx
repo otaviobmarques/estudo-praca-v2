@@ -33,9 +33,9 @@ export default function Admin() {
         <h3 id="t-usuarios">Usuários</h3>
         <table className="cen"><thead><tr><th>Nome</th><th>Usuário</th><th>E-mail</th><th>Papel</th><th>Situação</th><th className="adm-acoes">Ações</th></tr></thead>
           <tbody>{itens.map((u) => [
-            <tr key={u.id}><td>{u.nome}</td><td>{u.usuario}</td><td>{u.email}</td>
-              <td><span className={`selo-papel${u.papel === "administrador" ? " admin" : ""}`}>{u.papel === "administrador" ? "Administrador" : "Usuário"}</span></td>
-              <td><span className={`selo-sit ${u.ativo ? "ativo" : "inativo"}`}>{u.ativo ? "Ativo" : "Desativado"}</span></td>
+            <tr key={u.id}><td data-rot="Nome">{u.nome}</td><td data-rot="Usuário">{u.usuario}</td><td data-rot="E-mail">{u.email}</td>
+              <td data-rot="Papel"><span className={`selo-papel${u.papel === "administrador" ? " admin" : ""}`}>{u.papel === "administrador" ? "Administrador" : "Usuário"}</span></td>
+              <td data-rot="Situação"><span className={`selo-sit ${u.ativo ? "ativo" : "inativo"}`}>{u.ativo ? "Ativo" : "Desativado"}</span></td>
               <td className="adm-acoes"><button className="btn btn-secundario" onClick={() => alterar(u.id, { ativo: !u.ativo })}>{u.ativo ? "Desativar" : "Reativar"}</button>
                 <button className="btn btn-secundario" onClick={() => setSenhaDe(senhaDe === u.id ? null : u.id)}>Redefinir senha</button></td></tr>,
             senhaDe === u.id && <tr key={u.id + "-s"} className="adm-senha"><td colSpan={6}>

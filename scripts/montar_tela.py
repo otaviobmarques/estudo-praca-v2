@@ -4,7 +4,8 @@
 - DRE disponível também no Home Based; custos do DRE um a um (12 despesas fixas da planilha);
 - campos só de transferência (custo Detran, marketing) ocultos no Home Based;
 - DRE em 10 meses (scripts/tela_dre_meses.py);
-- ajustes de 29/10/2026: sem [REVISAR], EXEMPLO só no exemplo, versão compacta (scripts/tela_ajustes.py)."""
+- ajustes de 29/10/2026: sem [REVISAR], EXEMPLO só no exemplo, versão compacta (scripts/tela_ajustes.py);
+- celular e tablet (scripts/tela_celular.py)."""
 import re, sys
 T="/home/box/redbox/clientes/auto-visao/estudo-praca/design/tela/index.html"
 h=open(T).read()
@@ -37,6 +38,8 @@ import os; sys.path.insert(0,os.path.dirname(__file__)); from tela_dre_meses imp
 body=ajustar(body)  # DRE em 10 meses
 from tela_ajustes import ajustar as ajustar_tela, CSS as CSS_AJUSTES
 body=ajustar_tela(body)  # ajustes de 29/10/2026 (REVISAR, EXEMPLO, compacta)
+from tela_celular import ajustar as ajustar_celular, CSS as CSS_CELULAR
+body=ajustar_celular(body)  # celular e tablet
 open("modelos/tela/painel.html","w").write(body)
 css=open("modelos/tela/tela.css").read()
 css+="""
@@ -48,5 +51,6 @@ css+="""
 """
 css+=CSS_DRE_MESES
 css+=CSS_AJUSTES
+css+=CSS_CELULAR
 open("modelos/tela/tela.css","w").write(css)
 print("ok",len(body))
