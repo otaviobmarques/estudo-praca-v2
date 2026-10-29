@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: API do Gerador de Estudo de Praça
-  version: 0.2.0
+  version: 0.3.0
   description: >
     Rotas internas do sistema. Todas exigem sessão (cookie `sessao`), exceto entrar e as rotas de senha.
     Erros seguem o formato Problem Details (RFC 9457), com `content-type: application/problem+json`.
@@ -101,7 +101,7 @@ components:
             despesasGerais: { type: number }
     Estudo:
       type: object
-      required: [marca, modelo, cidade, uf, populacao, frota, cenario, percentuais, percentualDetran, ticketDetran, ticketCautelar, ecvs, laudosHomeBased, incluirDre, laudosUnidade, oferta, exemplo]
+      required: [marca, modelo, cidade, uf, populacao, frota, cenario, percentuais, percentualDetran, ticketDetran, ticketCautelar, ecvs, laudosHomeBased, incluirDre, oferta, exemplo]
       properties:
         marca: { type: string, enum: [auto-visao, royal] }
         modelo: { type: string, enum: [full, home_based] }
@@ -117,7 +117,12 @@ components:
         ecvs: { type: [number, "null"] }
         laudosHomeBased: { type: [number, "null"], description: "Obrigatório no Home Based (vazio bloqueia o PDF)" }
         incluirDre: { type: boolean, default: false }
-        laudosUnidade: { type: [number, "null"], description: "Laudos/mês da unidade (Full). Obrigatório se incluirDre" }
+        mesesDre:
+          type: [array, "null"]
+          minItems: 10
+          maxItems: 10
+          description: "DRE em 10 meses: volumes de cada mês. Ausente ou nulo = padrões (Full: colunas D–M da planilha, 100 + 10 … 550 + 100; Home Based: laudos/mês em todos os meses). Com incluirDre e os 10 meses zerados, o PDF é recusado (422). Substitui laudosUnidade (0.2.0)."
+          items: { type: object, required: [transferencias, cautelares], properties: { transferencias: { type: number, minimum: 0, example: 100, description: "Ignorado no Home Based" }, cautelares: { type: number, minimum: 0, example: 10 } } }
         oferta: { $ref: "#/components/schemas/Oferta" }
         exemplo: { type: boolean, description: "Marca d'água e selos de EXEMPLO" }
         dre: { $ref: "#/components/schemas/ParametrosDre" }

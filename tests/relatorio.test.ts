@@ -5,7 +5,7 @@ import { exemplo } from "../scripts/gerar-exemplos";
 import { CorpoRede } from "../app/api/v1/rede/[marca]/route";
 
 const texto = (h: string) => h.replace(/<style[\s\S]*?<\/style>/, "").replace(/<svg[\s\S]*?<\/svg>/g, " ").replace(/<[^>]+>/g, " ").replace(/\s+/g, " ");
-const paginas = (h: string) => h.match(/<section class="pag">/g)!.length;
+const paginas = (h: string) => h.match(/<section class="pag[ "]/g)!.length;
 const D = (m: DadosRelatorio["marca"], mod: DadosRelatorio["modelo"], dre: boolean, o: Partial<DadosRelatorio> = {}) => ({ ...exemplo(m, mod, dre), ...o });
 
 describe.each(["auto-visao", "royal"] as const)("Relatório %s (modelos da Julia)", (m) => {
@@ -16,10 +16,20 @@ describe.each(["auto-visao", "royal"] as const)("Relatório %s (modelos da Julia
     for (const x of ["9.968", "8.971", "R$ 1.597.897", "R$ 19.174.764", "Cenário provável (2%)", "Página 2 de 2"]) expect(t).toContain(x);
     expect(t).not.toMatch(/DRE mensal simulado/); expect(t).not.toMatch(outra);
   });
-  it("Full com DRE: 3 páginas, R$ 64.120,00 / R$ 38.783,80 / 64,35%", () => {
-    const t = texto(montarHtml(D(m, "full", true)));
-    for (const x of ["R$ 64.120,00", "R$ 38.783,80", "64,35%", "− R$ 3.847,20", "Página 3 de 3"]) expect(t).toContain(x);
+  it("Full com DRE: 3 páginas, DRE de 10 meses (planilha D–M) em página deitada", () => {
+    const h = montarHtml(D(m, "full", true)); const t = texto(h);
+    expect(paginas(h)).toBe(3);
+    expect(h.match(/<section class="pag pag-h">/g)).toHaveLength(1); expect(h).toContain("@page horizontal{size:A4 landscape");
+    for (let i = 1; i <= 10; i++) expect(t).toContain(`Mês ${i}`);
+    // mês 1 = 100 Detran + 10 cautelar; mês 10 = 550 + 100; total de 10 meses R$ 369.405,00 e margem 62,21%
+    for (const x of ["DRE simulado em 10 meses", "Total 10 meses", "2.661", "70.710", "R$ 369.405,00", "62,21%", "R$ 70.710,00", "Página 3 de 3"]) expect(t).toContain(x);
     expect(t).not.toMatch(outra);
+  });
+  it("Full com DRE: volumes de cada mês editáveis", () => {
+    const meses = Array.from({ length: 10 }, () => ({ transferencias: 360, cautelares: 40 }));
+    const t = texto(montarHtml(D(m, "full", true, { mesesDre: meses })));
+    expect(t).toContain("R$ 387.838,00"); // 10 × R$ 38.783,80 (exemplo de 400 laudos/mês)
+    expect(t).toContain("64,35%");
   });
   it("Home Based sem DRE: 2 páginas, sem DETRAN/credenciamento/ECV", () => {
     const h = montarHtml(D(m, "home_based", false)); const t = texto(h);
@@ -29,8 +39,9 @@ describe.each(["auto-visao", "royal"] as const)("Relatório %s (modelos da Julia
   it("Home Based com DRE: 3 páginas, receita = laudos × preço, sem DETRAN/ECV", () => {
     const h = montarHtml(D(m, "home_based", true)); const t = texto(h);
     expect(paginas(h)).toBe(3); expect(t).not.toMatch(/detran|credenci|\bECV/i);
-    expect(t).toContain("R$ 56.000,00"); // 200 × R$ 280
-    expect(t).toContain("DRE mensal simulado");
+    expect(t).toContain("56.000"); // 200 × R$ 280 por mês
+    expect(t).toContain("R$ 413.700,00"); // 10 × R$ 41.370,00
+    expect(t).toContain("DRE simulado em 10 meses");
     expect(h.match(/<div class="sec"><span>(\d)<\/span>/g)!.map((x) => x.match(/\d/)![0])).toEqual(["1", "2", "3", "4", "5"]);
   });
   it("aviso fixo (mesmo texto nos dois modelos) em todas as páginas", () => {
@@ -53,9 +64,10 @@ describe.each(["auto-visao", "royal"] as const)("Relatório %s (modelos da Julia
 
 describe("Bloqueios", () => {
   it("Home Based sem laudos bloqueia (com ou sem DRE)", () => {
-    for (const dre of [false, true]) expect(motivoBloqueio({ modelo: "home_based", laudosHomeBased: null, incluirDre: dre, laudosUnidade: null })).toMatch(/Sem esse número/);
+    for (const dre of [false, true]) expect(motivoBloqueio({ modelo: "home_based", laudosHomeBased: null, incluirDre: dre, mesesDre: null })).toMatch(/Sem esse número/);
   });
-  it("Full com DRE e sem laudos da unidade bloqueia", () => expect(() => montarHtml(D("royal", "full", true, { laudosUnidade: null }))).toThrow(/desligue o DRE/));
+  it("Full com DRE e os 10 meses zerados bloqueia", () => expect(() => montarHtml(D("royal", "full", true, { mesesDre: Array(10).fill({ transferencias: 0, cautelares: 0 }) }))).toThrow(/desligue o DRE/));
+  it("Full com DRE sem volumes usa os da planilha", () => expect(motivoBloqueio({ modelo: "full", laudosHomeBased: null, incluirDre: true, mesesDre: null })).toBeNull());
 });
 
 describe("Sobre a rede (validação do administrador)", () => {

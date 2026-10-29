@@ -1,5 +1,10 @@
 # Registro de mudanças
 ## [Não lançado]
+### Alterado
+- **DRE em 10 meses** (decisão do Otávio, 29/10/2026; ADR-0005): as colunas D–M da planilha de referência viram os meses 1 a 10, com os volumes dela como padrão (transferência 100 → 550, cautelar 10 → 100), editáveis mês a mês no painel, e total dos 10 meses. Pessoal pela regra TETO(laudos ÷ 200). Home Based com a mesma estrutura, começando com os laudos/mês informados em todos os meses.
+- PDF: página do DRE em A4 deitada (10 meses + total); as outras páginas continuam em pé.
+- API: `mesesDre` (10 meses) substitui `laudosUnidade`; `docs/openapi.yaml` 0.3.0.
+- Relatório padrão de Joinville com DRE: de R$ 38.783,80 (um mês com 400 laudos, margem 64,35%) para R$ 369.405,00 em 10 meses (margem 62,21%). O cálculo de um mês com 400 laudos continua testado.
 ### Adicionado
 - `.devcontainer/` para rodar o sistema no GitHub Codespaces sem instalar nada no computador: Chromium, fontes do relatório (Inter, Nunito, Raleway), Postgres e migrações automáticos; passos finais em `.devcontainer/LEIA-ME.md`.
 ## [0.2.1] — 2026-10-29

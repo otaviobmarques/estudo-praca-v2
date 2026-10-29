@@ -216,6 +216,42 @@ export function calcularDre(e: EntradaDre) {
   };
 }
 
+// ---------- DRE em 10 meses (decisão de 29/10/2026) ----------
+/** As 10 colunas D–M da planilha viram os meses 1 a 10; cada mês é o DRE mensal acima, com o volume daquele mês. */
+export const MESES_DRE = 10;
+export interface VolumeMes { transferencias: number; cautelares: number; /** só para reproduzir o xlsx */ pessoasFixas?: number }
+/** Volumes digitados nas colunas D–M de dre-auto-visao.xlsx (linhas 9 e 10): transferência 100 → 550 e cautelar 10 → 100. */
+const VOLUMES_PLANILHA: VolumeMes[] = Array.from({ length: MESES_DRE }, (_, i) => ({ transferencias: 100 + 50 * i, cautelares: 10 + 10 * i }));
+
+/**
+ * Volumes iniciais dos 10 meses, editáveis no painel. Full: os da planilha.
+ * Home Based: a planilha não tem esse modelo; todos os meses começam com os laudos/mês informados
+ * (curva de crescimento do Home Based [A CONFIRMAR]).
+ */
+export function volumesPadraoMeses(modelo: Modelo, laudosHomeBased?: number | null): VolumeMes[] {
+  if (modelo === "home_based") return Array.from({ length: MESES_DRE }, () => ({ transferencias: 0, cautelares: arred(laudosHomeBased ?? 0) }));
+  return VOLUMES_PLANILHA.map((v) => ({ ...v }));
+}
+
+export function calcularDreMeses(e: Omit<EntradaDre, "transferencias" | "cautelares" | "pessoasFixas"> & { meses: VolumeMes[] }) {
+  if (e.meses.length !== MESES_DRE) throw new Error(`O DRE precisa de ${MESES_DRE} meses`);
+  const meses = e.meses.map((v) => calcularDre({ ...e, transferencias: v.transferencias, cautelares: v.cautelares, pessoasFixas: v.pessoasFixas }));
+  // soma em centavos para o total bater com a soma dos meses
+  const soma = (f: (m: (typeof meses)[number]) => number) => meses.reduce((s, m) => s + centavos(f(m)), 0) / 100;
+  const total = {
+    transferencias: meses.reduce((s, m) => s + m.transferencias, 0), cautelares: meses.reduce((s, m) => s + m.cautelares, 0),
+    receitaTransferencia: soma((m) => m.receitaTransferencia), receitaCautelar: soma((m) => m.receitaCautelar),
+    receitaBruta: soma((m) => m.receitaBruta), impostos: soma((m) => m.impostos), receitaLiquida: soma((m) => m.receitaLiquida),
+    custoDetran: soma((m) => m.custoDetran), custoPesquisa: soma((m) => m.custoPesquisa), marketing: soma((m) => m.marketing),
+    parcela: soma((m) => m.parcela), royalties: soma((m) => m.royalties), cvTotal: soma((m) => m.cvTotal),
+    salarios: soma((m) => m.salarios), custoSocial: soma((m) => m.custoSocial), cpTotal: soma((m) => m.cpTotal),
+    despesas: meses[0].despesas.map((d, i) => ({ ...d, valor: soma((m) => m.despesas[i].valor) })),
+    totalDespesas: soma((m) => m.totalDespesas), ebitda: soma((m) => m.ebitda), margem: 0,
+  };
+  total.margem = total.receitaLiquida === 0 ? 0 : total.ebitda / total.receitaLiquida;
+  return { meses, total, parametros: meses[0].parametros };
+}
+
 // ---------- utilidades ----------
 function validarFaixa(v: number, min: number, max: number, nome: string) {
   if (!Number.isFinite(v) || v < min || v > max) throw new Error(`${nome} fora da faixa (${min} a ${max})`);

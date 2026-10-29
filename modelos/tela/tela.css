@@ -149,3 +149,9 @@ html:not([data-modelo="hb"]) .so-hb{display:none!important}
 .campo{position:relative}.lista-busca{position:absolute;z-index:20;left:0;right:0;top:100%;margin:4px 0 0;padding:4px;list-style:none;background:var(--cor-superficie);border:1.5px solid var(--cor-borda);border-radius:10px;max-height:280px;overflow:auto;box-shadow:0 8px 24px rgba(0,0,0,.12)}
 .lista-busca li{padding:8px 10px;border-radius:8px;cursor:pointer}.lista-busca li[aria-selected=true],.lista-busca li:hover{background:var(--cor-realce-suave)}
 .sub-dre{font-size:13px;margin:12px 0 4px}#d-padrao{margin-top:8px}
+
+/* ---- DRE em 10 meses ---- */
+.meses-dre-tab{width:100%;border-collapse:collapse;margin:4px 0}.meses-dre-tab th{font-size:12px;font-weight:600;text-align:left;padding:2px 4px}
+.meses-dre-tab td{padding:2px 4px}.meses-dre-tab input{width:100%;box-sizing:border-box;padding:6px 8px;border:1.5px solid var(--cor-borda);border-radius:8px;font:inherit;text-align:right}
+.rotulo-meses{font-size:13px;font-weight:600}
+.dre-rolagem{overflow-x:auto}.dre-meses{font-size:11px;white-space:nowrap}.dre-meses td,.dre-meses th{padding:5px 4px}.dre-meses tr td:first-child{padding-left:0}.dre-meses td+td,.dre-meses th+th{text-align:right}.dre-meses td:last-child,.dre-meses th:last-child{font-weight:700}

@@ -2,8 +2,9 @@
 - busca de município (lista sob o campo Cidade); UF preenchida pela seleção;
 - botões PNG/PDF com id; links Administração e Sair no topo;
 - DRE disponível também no Home Based; custos do DRE um a um (12 despesas fixas da planilha);
-- campos só de transferência (custo Detran, marketing) ocultos no Home Based."""
-import re
+- campos só de transferência (custo Detran, marketing) ocultos no Home Based;
+- DRE em 10 meses (scripts/tela_dre_meses.py)."""
+import re, sys
 T="/home/box/redbox/clientes/auto-visao/estudo-praca/design/tela/index.html"
 h=open(T).read()
 body=h[h.index("<body>")+6:h.index('<script src="app.js">')]
@@ -31,6 +32,8 @@ body=body[:ini]+f'<h3 class="sub-dre">Despesas fixas mensais</h3><div class="lin
 R('<div class="marca-dagua">EXEMPLO</div>','<div class="marca-dagua" id="r-marca-dagua">EXEMPLO</div>')
 R('<span class="selo-exemplo">','<span class="selo-exemplo" id="r-selo-ex">')
 R('<section class="bloco" id="r-dre-bloco">','<section class="bloco" id="r-dre-bloco" hidden>')
+import os; sys.path.insert(0,os.path.dirname(__file__)); from tela_dre_meses import ajustar, CSS as CSS_DRE_MESES
+body=ajustar(body)  # DRE em 10 meses
 open("modelos/tela/painel.html","w").write(body)
 css=open("modelos/tela/tela.css").read()
 css+="""
@@ -40,5 +43,6 @@ css+="""
 .lista-busca li{padding:8px 10px;border-radius:8px;cursor:pointer}.lista-busca li[aria-selected=true],.lista-busca li:hover{background:var(--cor-realce-suave)}
 .sub-dre{font-size:13px;margin:12px 0 4px}#d-padrao{margin-top:8px}
 """
+css+=CSS_DRE_MESES
 open("modelos/tela/tela.css","w").write(css)
 print("ok",len(body))

@@ -3,7 +3,7 @@ import { usuarioAtual } from "@/lib/auth";
 import { pool } from "@/lib/db";
 import { problema } from "@/lib/http";
 import { montarHtml, motivoBloqueio } from "@/lib/relatorio";
-import { gerarCodigoEstudo } from "@/lib/calculo";
+import { gerarCodigoEstudo, MESES_DRE } from "@/lib/calculo";
 import { htmlParaPdf, htmlParaPng } from "@/lib/pdf";
 export const runtime = "nodejs";
 const num = z.number().finite().nonnegative();
@@ -13,7 +13,9 @@ const Corpo = z.object({
   cenario: z.enum(["conservador", "provavel", "otimista"]),
   percentuais: z.object({ conservador: num.max(100), provavel: num.max(100), otimista: num.max(100) }),
   percentualDetran: num.max(100), ticketDetran: num, ticketCautelar: num,
-  ecvs: num.nullable(), laudosHomeBased: num.nullable(), incluirDre: z.boolean(), laudosUnidade: num.nullable(),
+  ecvs: num.nullable(), laudosHomeBased: num.nullable(), incluirDre: z.boolean(),
+  // DRE em 10 meses: volumes de cada mês; ausente ou nulo = padrões (Full: colunas D–M da planilha; Home Based: laudos/mês)
+  mesesDre: z.array(z.object({ transferencias: num.max(100000), cautelares: num.max(100000) })).length(MESES_DRE).nullable().default(null),
   oferta: z.object({ valorFranquia: num, entrada: num, parcelamento: z.boolean(), numeroParcelas: z.number().int().min(0).max(120), valorParcela: num, texto: z.string().max(400).optional() }),
   exemplo: z.boolean(),
   dre: z.object({

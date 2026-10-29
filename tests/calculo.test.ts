@@ -149,3 +149,44 @@ describe("Marketing do Home Based (decisão v2.0)", () => {
     expect(r.marketing).toBe(-2880); expect(r.ebitda).toBe(38783.8);
   });
 });
+
+import { calcularDreMeses, volumesPadraoMeses, MESES_DRE } from "../lib/calculo";
+describe("DRE em 10 meses (decisão de 29/10/2026: as colunas D–M da planilha viram os meses 1 a 10)", () => {
+  const COLS = ["D", "E", "F", "G", "H", "I", "J", "K", "L", "M"];
+  it("volumes padrão do Full = colunas D–M da planilha (transferência 100 → 550, cautelar 10 → 100)", () => {
+    const v = volumesPadraoMeses("full");
+    expect(v).toHaveLength(MESES_DRE);
+    expect(v).toEqual(COLS.map((c) => ({ transferencias: xlsx[c]["9"], cautelares: xlsx[c]["10"] })));
+  });
+  it("Home Based: começa com os laudos/mês informados em todos os meses (sem curva inventada)", () => {
+    expect(volumesPadraoMeses("home_based", 200)).toEqual(Array(10).fill({ transferencias: 0, cautelares: 200 }));
+    expect(volumesPadraoMeses("home_based", null)).toEqual(Array(10).fill({ transferencias: 0, cautelares: 0 }));
+  });
+  it("reproduz o xlsx mês a mês (ticket 250, royalties 0, pessoas do xlsx) e soma o total", () => {
+    const r = calcularDreMeses({ meses: COLS.map((c) => ({ transferencias: xlsx[c]["9"], cautelares: xlsx[c]["10"], pessoasFixas: xlsx[c]["24"] })), ticketDetran: 147, ticketCautelar: 250, parametros: { royaltiesPorLaudo: 0 } });
+    expect(r.meses.map((m) => m.ebitda)).toEqual(COLS.map((c) => xlsx[c]["43"]));
+    expect(r.total.ebitda).toBe(404695);
+    expect(r.total.receitaBruta).toBe(COLS.reduce((s, c) => s + xlsx[c]["13"], 0));
+  });
+  it("padrões do sistema (R$ 147/280, royalties R$ 8, pessoal TETO(laudos ÷ 200))", () => {
+    const r = calcularDreMeses({ meses: volumesPadraoMeses("full"), ticketDetran: 147, ticketCautelar: 280 });
+    expect(r.meses.map((m) => m.ebitda)).toEqual([2661, 11072, 16933, 25344, 33755, 39616, 48027, 56438, 64849, 70710]);
+    expect(r.meses.map((m) => m.pessoas)).toEqual([1, 1, 2, 2, 2, 3, 3, 3, 3, 4]);
+    expect([r.total.receitaBruta, r.total.impostos, r.total.receitaLiquida, r.total.cvTotal, r.total.cpTotal, r.total.totalDespesas, r.total.ebitda])
+      .toEqual([631750, -37905, 593845, -80150, -61200, -83090, 369405]);
+    expect(formatarPercentual(r.total.margem)).toBe("62,21%");
+    expect([r.total.transferencias, r.total.cautelares]).toEqual([3250, 550]);
+  });
+  it("cada mês é o DRE mensal de sempre (mesmo resultado de calcularDre)", () => {
+    const r = calcularDreMeses({ meses: [...Array(9).fill({ transferencias: 0, cautelares: 0 }), { transferencias: 360, cautelares: 40 }], ticketDetran: 147, ticketCautelar: 280 });
+    expect(r.meses[9].ebitda).toBe(38783.8);
+  });
+  it("Home Based: 10 × R$ 41.370,00 com 200 laudos e os padrões do Home Based", () => {
+    const r = calcularDreMeses({ meses: volumesPadraoMeses("home_based", 200), ticketDetran: 147, ticketCautelar: 280, parametros: padroesDre("home_based"), modelo: "home_based" });
+    expect(r.meses.every((m) => m.ebitda === 41370)).toBe(true);
+    expect([r.total.receitaBruta, r.total.ebitda]).toEqual([560000, 413700]);
+  });
+  it("exige exatamente 10 meses", () => {
+    expect(() => calcularDreMeses({ meses: volumesPadraoMeses("full").slice(0, 9), ticketDetran: 147, ticketCautelar: 280 })).toThrow(/10 meses/);
+  });
+});
