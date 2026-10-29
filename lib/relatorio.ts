@@ -69,8 +69,11 @@ const ASSETS = path.join(process.cwd(), "public");
 const cache = new Map<string, string>();
 const ler = (p: string, enc: BufferEncoding = "utf8") => { const k = p + enc; if (!cache.has(k)) cache.set(k, fs.readFileSync(p, enc)); return cache.get(k)!; };
 const dataUri = (p: string, tipo: string) => `data:${tipo};base64,${ler(p, "base64")}`;
+// Fontes embutidas no PDF (as mesmas da tela, public/fontes), para não depender das fontes instaladas no servidor.
+const FONTES = () => ([["Inter", "100 900"], ["Nunito", "200 1000"], ["Raleway", "100 900"]] as const)
+  .map(([f, p]) => `@font-face{font-family:"${f}";src:url(${dataUri(path.join(ASSETS, "fontes", `${f}.woff2`), "font/woff2")}) format("woff2");font-weight:${p}}`).join("");
 function estilo(marca: Marca) {
-  return ler(path.join(RAIZ, marca, "estilo.css")).replace(/url\(([\w.-]+\.png)\)/g, (_m, f) => `url(${dataUri(path.join(RAIZ, marca, f), "image/png")})`);
+  return FONTES() + ler(path.join(RAIZ, marca, "estilo.css")).replace(/url\(([\w.-]+\.png)\)/g, (_m, f) => `url(${dataUri(path.join(RAIZ, marca, f), "image/png")})`);
 }
 function paginas(marca: Marca, arq: "full" | "home-based") {
   const h = ler(path.join(RAIZ, marca, `${arq}.html`))
@@ -160,8 +163,8 @@ export function montarHtml(d: DadosRelatorio): string {
 <tr class="t"><td>Faturamento bruto anual*</td><td></td><td></td><td></td><td>${R0(pot.faturamentoAno)}</td></tr>$2`);
     // premissas: mesmo texto de cada modelo da Julia (a Royal tem a versão curta), só com os números do estudo
     p1 = d.marca === "royal"
-      ? troca(p1, /(<p class="prem">Premissas:)[\s\S]*?(\*Estimativa de potencial;)/, `$1 laudos/mês = arred(frota × ${N(pc)}%); ${N(pd)}% Detran e ${N(100 - pd)}% cautelar; tickets ${R0(d.ticketDetran)} e ${R0(d.ticketCautelar)}; anual = mensal × 12; dia útil = arred(mês ÷ 22). $2`)
-      : troca(p1, /(<p class="prem">Premissas:)[\s\S]*?(\*Estimativa de potencial;)/, `$1 laudos/mês = arred(frota × ${N(pc)}%); ${N(pd)}% vistoria Detran e ${N(100 - pd)}% vistoria cautelar; ticket Detran ${R0(d.ticketDetran)} e cautelar ${R0(d.ticketCautelar)}; faturamento = laudos Detran × ticket Detran + laudos cautelar × ticket cautelar; anual = mensal × 12; dia útil = arred(mês ÷ 22). $2`);
+      ? troca(p1, /(<p class="prem">Premissas:)[\s\S]*?(\*Estimativa de potencial\.)/, `$1 laudos/mês = arred(frota × ${N(pc)}%); ${N(pd)}% Detran e ${N(100 - pd)}% cautelar; tickets ${R0(d.ticketDetran)} e ${R0(d.ticketCautelar)}; anual = mensal × 12; dia útil = arred(mês ÷ 22). $2`)
+      : troca(p1, /(<p class="prem">Premissas:)[\s\S]*?(\*Estimativa de potencial\.)/, `$1 laudos/mês = arred(frota × ${N(pc)}%); ${N(pd)}% vistoria Detran e ${N(100 - pd)}% vistoria cautelar; ticket Detran ${R0(d.ticketDetran)} e cautelar ${R0(d.ticketCautelar)}; faturamento = laudos Detran × ticket Detran + laudos cautelar × ticket cautelar; anual = mensal × 12; dia útil = arred(mês ÷ 22). $2`);
   }
   pags[0] = p1;
 

@@ -642,7 +642,7 @@ Nenhuma pendência bloqueia o uso local do MVP; o bloco A bloqueia a publicaçã
 - C4. Textos automáticos com as faixas do site atual (500 mil/200 mil habitantes; 5.000/2.000 laudos), aplicadas ao cenário escolhido.
 - C5. Frota base = frota total do município.
 - C6. Exibição das premissas no relatório: o modelo aprovado da Julia mostra uma linha de premissas (percentual, divisão e tickets); o sistema segue o modelo aprovado.
-- C7. Textos marcados **"[REVISAR – OTÁVIO]"** nos modelos da Julia (mantidos como estão).
+- C7. ~~Textos marcados **"[REVISAR – OTÁVIO]"** nos modelos da Julia~~ — **resolvida em 29/10/2026:** removidos por decisão do Otávio; vale o aviso fixo.
 - C8. Página do DRE do Home Based: a Julia não fez modelo próprio; o sistema reaproveita a página do DRE do Full.
 
 **D. Fases seguintes (não bloqueiam o MVP)**

@@ -83,3 +83,14 @@ describe("Regras da nova senha", () => {
   it.each([["Expansao", "Expansao", false], ["expansao1", "expansao1", false], ["Expansao1", "Expansao2", false], ["Exp1", "Exp1", false], ["Expansao1", "Expansao1", true]])
   ("%s / %s → %s", (a, b, ok) => expect(avaliarSenha(a, b).valida).toBe(ok));
 });
+
+describe("Sem marcações de revisão (decisão do Otávio: remover os textos [REVISAR])", () => {
+  it.each(["auto-visao", "royal"] as const)("PDFs da %s", (m) => {
+    for (const [mod, dre] of [["full", false], ["full", true], ["home_based", false], ["home_based", true]] as const)
+      expect(texto(montarHtml(D(m, mod, dre)))).not.toMatch(/\[(REVISAR|VERIFICAR)/);
+  });
+  it("tela", async () => {
+    const fs = await import("node:fs");
+    expect(fs.readFileSync("modelos/tela/painel.html", "utf8")).not.toMatch(/\[(REVISAR|VERIFICAR)/);
+  });
+});

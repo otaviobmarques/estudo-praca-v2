@@ -155,3 +155,29 @@ html:not([data-modelo="hb"]) .so-hb{display:none!important}
 .meses-dre-tab td{padding:2px 4px}.meses-dre-tab input{width:100%;box-sizing:border-box;padding:6px 8px;border:1.5px solid var(--cor-borda);border-radius:8px;font:inherit;text-align:right}
 .rotulo-meses{font-size:13px;font-weight:600}
 .dre-rolagem{overflow-x:auto}.dre-meses{font-size:11px;white-space:nowrap}.dre-meses td,.dre-meses th{padding:5px 4px}.dre-meses tr td:first-child{padding-left:0}.dre-meses td+td,.dre-meses th+th{text-align:right}.dre-meses td:last-child,.dre-meses th:last-child{font-weight:700}
+
+/* ---- ajustes de 29/10/2026: EXEMPLO só no exemplo, seta única, versão compacta ---- */
+.sem-exemplo .so-exemplo{display:none!important}
+.entrada select{appearance:none;-webkit-appearance:none;background:none;cursor:default}
+:root{--painel-largura:380px}
+body{font-size:13px}
+.app{grid-template-rows:60px auto}
+.topo{height:60px;padding:var(--esp-2) var(--esp-5)}.topo img{height:30px}.topo h1{font-size:16px}
+.painel{padding:var(--esp-4) var(--esp-5);gap:var(--esp-4)}
+.grupo{gap:var(--esp-2)}.grupo>h2{font-size:12px}
+.btn{height:38px;font-size:13px;padding:0 var(--esp-3)}
+.acoes .btn{white-space:nowrap}
+.entrada{height:38px}.entrada input,.entrada select,textarea{font-size:13px}
+.campo label{font-size:12px}
+.seletor-marca button{height:32px;font-size:13px}
+.relatorio{padding:var(--esp-5);gap:var(--esp-4)}
+.cab h2{font-size:30px}
+.grade{gap:var(--esp-3)}
+.cartao{padding:var(--esp-3) var(--esp-4)}.cartao .val,.grade .cartao .val{font-size:22px}
+.seletor-modelo button{padding:7px 10px}.seletor-cenario button{padding:7px 4px}
+.faixa-cenario{font-size:13px;padding:8px 12px}
+.resultado b{font-size:22px}.rn b{font-size:22px}.rede{padding:var(--esp-4)}.rede-tit{font-size:19px}
+.oferta-num b{font-size:18px}
+.bloco{padding:var(--esp-4)}.bloco h3{font-size:15px}
+.cen th,.cen td{padding:7px 10px}
+.marca-dagua{font-size:140px}

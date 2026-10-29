@@ -1,6 +1,12 @@
 # Registro de mudanças
 ## [Não lançado]
 ### Alterado
+- Tela principal mais compacta (botões, campos, títulos, cartões e painel menores) e Administração refeita com o mesmo design system da tela (cabeçalho, blocos, campos, botões e selos; redefinição de senha em linha, sem janela do navegador).
+- Removidos os textos provisórios "[REVISAR – OTÁVIO]" e "[VERIFICAR]" dos modelos do relatório e da tela (decisão do Otávio; pendência C7). O aviso fixo aprovado continua em todas as páginas.
+### Corrigido
+- Fontes: Inter, Nunito e Raleway passam a ser servidas pelo próprio sistema (`public/fontes`, licença OFL) em todas as telas e embutidas no PDF; antes cada computador usava a fonte que tivesse instalada. CSP com `font-src 'self' data:`.
+- Selos "EXEMPLO" dos cartões de população e frota e do DRE apareciam também em cidades reais.
+- Campo UF com duas setas.
 - **DRE em 10 meses** (decisão do Otávio, 29/10/2026; ADR-0005): as colunas D–M da planilha de referência viram os meses 1 a 10, com os volumes dela como padrão (transferência 100 → 550, cautelar 10 → 100), editáveis mês a mês no painel, e total dos 10 meses. Pessoal pela regra TETO(laudos ÷ 200). Home Based com a mesma estrutura, começando com os laudos/mês informados em todos os meses.
 - PDF: página do DRE em A4 deitada (10 meses + total); as outras páginas continuam em pé.
 - API: `mesesDre` (10 meses) substitui `laudosUnidade`; `docs/openapi.yaml` 0.3.0.
