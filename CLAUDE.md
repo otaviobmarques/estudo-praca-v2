@@ -78,6 +78,8 @@ docs/                openapi.yaml, adr/, exemplos/, comparacao/, manual/capturas
 
 **DRE (Full)** com 400 laudos da unidade (360 Detran + 40 cautelar): receita bruta **R$ 64.120,00**; impostos 6% = R$ 3.847,20; receita líquida R$ 60.272,80; custos variáveis R$ 8.080,00 (pesquisa R$ 25/cautelar, marketing R$ 8/Detran, parcela R$ 1.000, royalties R$ 8/laudo); pessoal R$ 5.100,00 (TETO(400 ÷ 200) = 2 × R$ 1.700 + 50%); despesas fixas R$ 8.309,00; **resultado R$ 38.783,80; margem 64,35% sobre a receita líquida**.
 
+**DRE em 10 meses** (decisão 47, ADR-0005): as colunas D–M da planilha viram os meses 1 a 10 (`calcularDreMeses`); cada mês é o DRE mensal acima. Volumes padrão do Full = planilha (transferência 100 → 550, cautelar 10 → 100), editáveis; pessoal TETO(laudos do mês ÷ 200). Com os padrões: resultado mês 1 R$ 2.661 … mês 10 R$ 70.710; **total R$ 369.405,00, margem 62,21%**. Home Based 200 laudos/mês: 10 × R$ 41.370 = **R$ 413.700,00**. No PDF, a página do DRE é A4 deitada.
+
 **Home Based**: laudos/mês digitados (sugestão 180–250; vazio **bloqueia o PDF**); dia útil = arred(laudos ÷ 22); faturamento = laudos × preço do laudo (R$ 280); anual × 12. Exemplo 200 laudos: **R$ 56.000/mês, R$ 672.000/ano, 9/dia útil**. DRE opcional (chave desligada por padrão; 2 páginas sem DRE, 3 com DRE). Começam **zeradas**: custo Detran, marketing por transferência, aluguel, água, energia, manutenção predial, sistema de filmagem, canal de ouvidoria, certificação ISO + seguros; **marketing (R$/mês) começa zerado** e o Otávio preenche. Com os padrões: receita líquida R$ 52.640, resultado **R$ 41.370,00**.
 
 **Oferta**: Full R$ 30.000 = 10.000 + 20 × 1.000; Home Based R$ 15.000 = 5.000 + 10 × 1.000. Conta que não fecha só gera alerta.

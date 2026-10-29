@@ -1,0 +1,29 @@
+/* Administração com o mesmo design system da tela (modelos/tela/tokens.css e tela.css): cores, fontes, botões e campos. */
+.adm{min-height:100vh;background:var(--cor-fundo)}
+.adm .topo h1{white-space:nowrap}
+.adm .topo .conta a{color:var(--cor-sobre-escura)}
+.adm-corpo{max-width:1120px;margin:0 auto;padding:var(--esp-5);display:flex;flex-direction:column;gap:var(--esp-4)}
+.adm-cab{display:flex;align-items:flex-end;justify-content:space-between;gap:var(--esp-4)}
+.adm-cab h2{font:var(--peso-titulo) 26px/1.1 var(--fonte-titulo);text-transform:var(--caixa-titulo)}
+.adm-cab p{color:var(--cor-texto-suave);margin-top:4px}
+.adm .bloco h3{margin-bottom:var(--esp-2)}
+.adm .bloco>p.ajuda{color:var(--cor-texto-suave);font-size:12.5px;margin-bottom:var(--esp-3)}
+.adm table.cen td,.adm table.cen th{text-align:left}
+.adm table.cen .adm-acoes{text-align:right;white-space:nowrap}
+.adm .btn{height:34px;font-size:12.5px}
+.adm .adm-acoes .btn+.btn{margin-left:var(--esp-2)}
+.selo-papel,.selo-sit{display:inline-block;font:700 11px var(--fonte-texto);padding:2px 8px;border-radius:99px;border:1px solid var(--cor-borda);color:var(--cor-texto-suave)}
+.selo-papel.admin{background:var(--cor-escura);color:var(--cor-sobre-escura);border-color:var(--cor-escura)}
+.selo-sit.ativo{color:var(--ok);border-color:currentColor}.selo-sit.inativo{color:var(--erro);border-color:currentColor}
+.adm-form{display:grid;grid-template-columns:repeat(4,1fr) auto;gap:var(--esp-3);align-items:end}
+.adm-form .btn{height:38px}
+.adm-senha td{background:var(--cor-realce-suave)}
+.adm-senha .linha-senha{display:flex;gap:var(--esp-2);align-items:center;justify-content:flex-end}
+.adm-senha .entrada{width:320px;background:var(--cor-superficie)}
+.adm-msg{font-size:13px;font-weight:600;padding:8px 12px;border-radius:var(--raio-campo);background:var(--cor-superficie);border-left:4px solid var(--ok)}
+.adm-msg.erro{border-left-color:var(--erro)}
+.adm-redes{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:var(--esp-4)}
+.adm-redes form{display:flex;flex-direction:column;gap:var(--esp-3)}
+.adm-redes h4{font:800 15px var(--fonte-titulo);text-transform:var(--caixa-titulo)}
+.adm-redes .msg{font-size:12.5px;color:var(--cor-texto-suave);min-height:1em}
+@media (max-width:900px){.adm-form{grid-template-columns:1fr 1fr}.adm .topo .base{display:none}}

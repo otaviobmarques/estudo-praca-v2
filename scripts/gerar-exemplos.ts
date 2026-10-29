@@ -12,7 +12,7 @@ const REDE = {
 export function exemplo(marca: Marca, modelo: Modelo, dre: boolean): DadosRelatorio {
   return { marca, modelo, cidade: "Joinville", uf: "SC", populacao: 664541, frota: 498378, cenario: "provavel", percentuais: { ...PADROES.cenarios },
     percentualDetran: 90, ticketDetran: 147, ticketCautelar: 280, ecvs: null, laudosHomeBased: modelo === "home_based" ? 200 : null, incluirDre: dre,
-    laudosUnidade: dre && modelo === "full" ? 400 : null, oferta: { ...PADROES.oferta[modelo], texto: TEXTO_OFERTA[modelo] }, exemplo: true, rede: REDE[marca],
+    mesesDre: null, oferta: { ...PADROES.oferta[modelo], texto: TEXTO_OFERTA[modelo] }, exemplo: true, rede: REDE[marca],
     codigo: `${marca === "royal" ? "RV" : "AV"}-20261029-0100-EXMP`, geradoEm: "29/10/2026 01:00", usuario: "exemplo" };
 }
 if (process.argv[1]?.endsWith("gerar-exemplos.ts")) (async () => {

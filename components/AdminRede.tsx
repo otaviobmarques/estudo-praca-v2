@@ -13,15 +13,15 @@ export default function AdminRede() {
     const r = await fetch(`/api/v1/rede/${marca}`, { method: "PUT", headers: { "content-type": "application/json" }, body: JSON.stringify(f) });
     setMsg({ ...msg, [marca]: r.ok ? "Salvo. Vale para os próximos PDFs." : `Não salvo: ${(await r.json()).detail ?? "dados inválidos"}` });
   }
-  return <section aria-labelledby="t-rede"><h2 id="t-rede">Sobre a rede</h2>
-    <p style={{ color: "#575757" }}>Textos e números exibidos no relatório de cada marca. Guarde a comprovação dos números e da frase de destaque antes de publicar (regras do CONAR).</p>
-    <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(340px,1fr))", gap: 24 }}>
-      {[...itens].sort((a, b) => a.marca.localeCompare(b.marca)).map((r) => <form key={r.marca} onSubmit={(e) => salvar(e, r.marca)} style={{ border: "1px solid #DADADA", borderRadius: 16, padding: 20, display: "grid", gap: 10 }} aria-label={`Sobre a rede — ${NOME[r.marca]}`}>
-        <h3 style={{ margin: 0 }}>{NOME[r.marca]}</h3>
-        {CAMPOS.map(([k, rot, max]) => <label key={k} style={{ display: "grid", gap: 4, fontSize: 13 }}>{rot}
-          <input name={k} defaultValue={r[k] ?? ""} maxLength={max} required={k !== "destaque"} style={{ height: 40, border: "1.5px solid #DADADA", borderRadius: 10, padding: "0 10px", fontSize: 14 }} /></label>)}
-        <button type="submit" style={{ height: 40, borderRadius: 99, border: 0, background: "#1A1A1A", color: "#fff", fontWeight: 700, cursor: "pointer" }}>Salvar {NOME[r.marca]}</button>
-        <p role="status" style={{ margin: 0, fontSize: 13 }}>{msg[r.marca] ?? ""}</p>
+  return <section className="bloco" aria-labelledby="t-rede"><h3 id="t-rede">Sobre a rede</h3>
+    <p className="ajuda">Textos e números exibidos no relatório de cada marca. Guarde a comprovação dos números e da frase de destaque antes de publicar (regras do CONAR).</p>
+    <div className="adm-redes">
+      {[...itens].sort((a, b) => a.marca.localeCompare(b.marca)).map((r) => <form key={r.marca} onSubmit={(e) => salvar(e, r.marca)} aria-label={`Sobre a rede — ${NOME[r.marca]}`}>
+        <h4>{NOME[r.marca]}</h4>
+        {CAMPOS.map(([k, rot, max]) => <div className="campo" key={k}><label htmlFor={`${r.marca}-${k}`}>{rot}</label>
+          <div className="entrada"><input id={`${r.marca}-${k}`} name={k} defaultValue={r[k] ?? ""} maxLength={max} required={k !== "destaque"} /></div></div>)}
+        <button type="submit" className="btn btn-escuro">Salvar {NOME[r.marca]}</button>
+        <p role="status" className="msg">{msg[r.marca] ?? ""}</p>
       </form>)}
     </div></section>;
 }

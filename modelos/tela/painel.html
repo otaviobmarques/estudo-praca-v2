@@ -46,7 +46,7 @@
         <div class="campo"><label for="f-frota">Frota de veículos</label>
           <div class="entrada auto"><svg class="ic"><use href="#ic-frota"/></svg><input id="f-frota" inputmode="numeric"></div></div>
       </div>
-      <span class="selo-auto"><svg class="ic" style="width:14px;height:14px"><use href="#ic-editar"/></svg>Preenchido pela base e editável · <span id="selo-ex-base">valores de EXEMPLO</span></span>
+      <span class="selo-auto"><svg class="ic" style="width:14px;height:14px"><use href="#ic-editar"/></svg>Preenchido pela base e editável<span id="selo-ex-base"> · valores de EXEMPLO</span></span>
       <div class="campo"><label for="f-ecv" id="l-ecv">ECVs concorrentes</label>
         <div class="entrada"><svg class="ic"><use href="#ic-concorrentes"/></svg><input id="f-ecv" inputmode="numeric"></div>
         <span class="ajuda">Informado pelo usuário (opcional).</span></div>
@@ -93,12 +93,10 @@
     </section>
 
     <details class="grupo recolhivel" id="g-dre">
-      <summary><h2><svg class="ic"><use href="#ic-faturamento"/></svg>DRE mensal <span class="tag-ex">EXEMPLO</span></h2><svg class="ic seta"><use href="#ic-seletor"/></svg></summary>
-      <span class="ajuda">Premissas da planilha de referência, editáveis. Volume = laudos/mês da unidade; tickets e divisão vêm do painel.</span>
+      <summary><h2><svg class="ic"><use href="#ic-faturamento"/></svg>DRE em 10 meses <span class="tag-ex so-exemplo">EXEMPLO</span></h2><svg class="ic seta"><use href="#ic-seletor"/></svg></summary>
+      <span class="ajuda">Premissas da planilha de referência, editáveis. Volume = laudos de cada mês (tabela abaixo); tickets e divisão vêm do painel.</span>
       <label class="chave"><input type="checkbox" id="d-on" role="switch"><span class="trilho" aria-hidden="true"></span><span>Incluir DRE no relatório</span></label>
-      <div class="campo so-full"><label for="d-lu">Laudos/mês da unidade <span class="req" id="d-req" hidden>obrigatório</span></label><div class="entrada" id="d-lu-box"><input id="d-lu" value="" placeholder="Ex.: 400" inputmode="decimal" aria-describedby="d-alerta"></div>
-      <p class="alerta" id="d-alerta" role="alert" hidden><svg class="ic"><use href="#ic-aviso"/></svg>Informe os laudos/mês da unidade para incluir o DRE. Sem esse número, o PDF não sai com o DRE.</p>
-      <p class="ajuda">Volume próprio da unidade, dividido pela % Detran/cautelar. Não usa o potencial da cidade.</p></div><p class="ajuda so-hb">No Home Based, o DRE usa os laudos/mês e o preço do laudo informados acima. As despesas que não se aplicam começam zeradas e podem ser editadas.</p><p class="alerta so-hb" id="d-alerta-hb" role="alert" hidden><svg class="ic"><use href="#ic-aviso"/></svg>Informe os laudos/mês do Home Based para incluir o DRE.</p>
+      <div class="campo meses-dre"><span class="rotulo-meses">Laudos de cada mês <span class="req" id="d-req" hidden>obrigatório</span></span><table class="meses-dre-tab"><thead><tr><th>Mês</th><th class="so-full">Detran</th><th>Cautelar</th></tr></thead><tbody><tr><th scope="row">1</th><td class="so-full"><input id="d-m1-t" inputmode="numeric" aria-label="Mês 1 · laudos Detran"></td><td><input id="d-m1-c" inputmode="numeric" aria-label="Mês 1 · laudos cautelares"></td></tr><tr><th scope="row">2</th><td class="so-full"><input id="d-m2-t" inputmode="numeric" aria-label="Mês 2 · laudos Detran"></td><td><input id="d-m2-c" inputmode="numeric" aria-label="Mês 2 · laudos cautelares"></td></tr><tr><th scope="row">3</th><td class="so-full"><input id="d-m3-t" inputmode="numeric" aria-label="Mês 3 · laudos Detran"></td><td><input id="d-m3-c" inputmode="numeric" aria-label="Mês 3 · laudos cautelares"></td></tr><tr><th scope="row">4</th><td class="so-full"><input id="d-m4-t" inputmode="numeric" aria-label="Mês 4 · laudos Detran"></td><td><input id="d-m4-c" inputmode="numeric" aria-label="Mês 4 · laudos cautelares"></td></tr><tr><th scope="row">5</th><td class="so-full"><input id="d-m5-t" inputmode="numeric" aria-label="Mês 5 · laudos Detran"></td><td><input id="d-m5-c" inputmode="numeric" aria-label="Mês 5 · laudos cautelares"></td></tr><tr><th scope="row">6</th><td class="so-full"><input id="d-m6-t" inputmode="numeric" aria-label="Mês 6 · laudos Detran"></td><td><input id="d-m6-c" inputmode="numeric" aria-label="Mês 6 · laudos cautelares"></td></tr><tr><th scope="row">7</th><td class="so-full"><input id="d-m7-t" inputmode="numeric" aria-label="Mês 7 · laudos Detran"></td><td><input id="d-m7-c" inputmode="numeric" aria-label="Mês 7 · laudos cautelares"></td></tr><tr><th scope="row">8</th><td class="so-full"><input id="d-m8-t" inputmode="numeric" aria-label="Mês 8 · laudos Detran"></td><td><input id="d-m8-c" inputmode="numeric" aria-label="Mês 8 · laudos cautelares"></td></tr><tr><th scope="row">9</th><td class="so-full"><input id="d-m9-t" inputmode="numeric" aria-label="Mês 9 · laudos Detran"></td><td><input id="d-m9-c" inputmode="numeric" aria-label="Mês 9 · laudos cautelares"></td></tr><tr><th scope="row">10</th><td class="so-full"><input id="d-m10-t" inputmode="numeric" aria-label="Mês 10 · laudos Detran"></td><td><input id="d-m10-c" inputmode="numeric" aria-label="Mês 10 · laudos cautelares"></td></tr></tbody></table><p class="alerta" id="d-alerta" role="alert" hidden><svg class="ic"><use href="#ic-aviso"/></svg>Preencha os laudos dos 10 meses ou desligue o DRE. Sem esses números, o PDF não sai com o DRE.</p><p class="ajuda so-full">Padrão: colunas da planilha de referência (mês 1 = 100 Detran + 10 cautelar … mês 10 = 550 + 100), editáveis por cidade. Não usa o potencial da cidade.</p><p class="ajuda so-hb">Mês em branco = laudos/mês informados acima.</p></div><p class="ajuda so-hb">No Home Based, o DRE usa os laudos/mês e o preço do laudo informados acima. As despesas que não se aplicam começam zeradas e podem ser editadas.</p><p class="alerta so-hb" id="d-alerta-hb" role="alert" hidden><svg class="ic"><use href="#ic-aviso"/></svg>Informe os laudos/mês do Home Based para incluir o DRE.</p>
       <div class="linha"><div class="campo"><label for="d-imp">Impostos (% receita bruta)</label><div class="entrada"><input id="d-imp" value="6" inputmode="decimal"></div></div><div class="campo"><label for="d-roy">Royalties por laudo (R$)</label><div class="entrada"><input id="d-roy" value="8" inputmode="decimal"></div></div></div>
       <div class="linha so-full"><div class="campo"><label for="d-mkt">Marketing (R$ por vistoria Detran)</label><div class="entrada"><input id="d-mkt" value="8" inputmode="decimal"></div></div><div class="campo"><label for="d-cdet">Custo por vistoria Detran (R$)</label><div class="entrada"><input id="d-cdet" value="0" inputmode="decimal"></div></div></div><div class="linha so-hb"><div class="campo"><label for="d-mkth">Marketing (R$/mês)</label><div class="entrada"><input id="d-mkth" value="0" inputmode="decimal"></div></div></div>
       <div class="linha"><div class="campo"><label for="d-ccau">Custo da pesquisa por laudo cautelar (R$)</label><div class="entrada"><input id="d-ccau" value="25" inputmode="decimal"></div></div><div class="campo"><label for="d-parc">Parcela da franquia (R$/mês)</label><div class="entrada"><input id="d-parc" value="1.000" inputmode="decimal"></div></div></div>
@@ -106,7 +104,7 @@
       <h3 class="sub-dre">Despesas fixas mensais</h3><div class="linha"><div class="campo"><label for="d-alu">Aluguel (R$/mês)</label><div class="entrada"><input id="d-alu" inputmode="decimal"></div></div><div class="campo"><label for="d-agua">Água (R$/mês)</label><div class="entrada"><input id="d-agua" inputmode="decimal"></div></div><div class="campo"><label for="d-ener">Energia (R$/mês)</label><div class="entrada"><input id="d-ener" inputmode="decimal"></div></div><div class="campo"><label for="d-net">Internet / telefonia (R$/mês)</label><div class="entrada"><input id="d-net" inputmode="decimal"></div></div><div class="campo"><label for="d-cont">Contabilidade (R$/mês)</label><div class="entrada"><input id="d-cont" inputmode="decimal"></div></div><div class="campo"><label for="d-manu">Manutenção predial (R$/mês)</label><div class="entrada"><input id="d-manu" inputmode="decimal"></div></div><div class="campo"><label for="d-mat">Material de escritório (R$/mês)</label><div class="entrada"><input id="d-mat" inputmode="decimal"></div></div><div class="campo"><label for="d-imps">Impressões (R$/mês)</label><div class="entrada"><input id="d-imps" inputmode="decimal"></div></div><div class="campo"><label for="d-film">Sistema de filmagem (R$/mês)</label><div class="entrada"><input id="d-film" inputmode="decimal"></div></div><div class="campo"><label for="d-ouv">Canal de ouvidoria (R$/mês)</label><div class="entrada"><input id="d-ouv" inputmode="decimal"></div></div><div class="campo"><label for="d-iso">Certificação ISO + seguros (R$/mês)</label><div class="entrada"><input id="d-iso" inputmode="decimal"></div></div><div class="campo"><label for="d-ger">Despesas gerais (R$/mês)</label><div class="entrada"><input id="d-ger" inputmode="decimal"></div></div></div><button type="button" class="btn btn-secundario" id="d-padrao">Voltar aos padrões do modelo</button></details>
 
     <section class="grupo">
-      <h2><svg class="ic"><use href="#ic-oferta-franquia"/></svg>Oferta de franquia</h2>
+      <h2><svg class="ic"><use href="#ic-oferta-franquia"/></svg>Proposta comercial</h2>
       <div class="linha">
         <div class="campo"><label for="f-taxa">Taxa total (R$)</label><div class="entrada"><input id="f-taxa"></div></div>
         <div class="campo"><label for="f-ent">Entrada (R$)</label><div class="entrada"><input id="f-ent"></div></div>
@@ -130,8 +128,8 @@
 
     <div class="faixa-cenario so-full"><svg class="ic"><use href="#ic-cenarios"/></svg><span>Cenário <b id="r-cen-nome">provável</b> · <b id="r-cen-pct">2%</b> da frota por mês</span></div>
     <div class="grade">
-      <div class="cartao"><div class="rot"><svg class="ic"><use href="#ic-populacao"/></svg>População</div><div class="val" id="r-pop"></div><div class="fonte">Estimativa IBGE 2025 · EXEMPLO</div></div>
-      <div class="cartao"><div class="rot"><svg class="ic"><use href="#ic-frota"/></svg>Frota de veículos</div><div class="val" id="r-frota"></div><div class="fonte">Senatran, set/2026 · EXEMPLO</div></div>
+      <div class="cartao"><div class="rot"><svg class="ic"><use href="#ic-populacao"/></svg>População</div><div class="val" id="r-pop"></div><div class="fonte">Estimativa IBGE 2025<span class="so-exemplo"> · EXEMPLO</span></div></div>
+      <div class="cartao"><div class="rot"><svg class="ic"><use href="#ic-frota"/></svg>Frota de veículos</div><div class="val" id="r-frota"></div><div class="fonte">Senatran, set/2026<span class="so-exemplo"> · EXEMPLO</span></div></div>
       <div class="cartao"><div class="rot"><svg class="ic"><use href="#ic-laudos"/></svg><span id="rl-lm">Laudos por mês</span></div><div class="val" id="r-lm"></div><div class="fonte" id="r-lm-f"></div></div>
       <div class="cartao"><div class="rot"><svg class="ic"><use href="#ic-dia-util"/></svg><span id="rl-ld">Laudos por dia útil</span></div><div class="val" id="r-ld"></div><div class="fonte">Mês ÷ 22 dias úteis</div></div>
       <div class="cartao destaque"><div class="rot"><svg class="ic"><use href="#ic-faturamento"/></svg>Fat. bruto mensal*</div><div class="val" id="r-fm"></div><div class="fonte">Potencial estimado</div></div>
@@ -152,9 +150,9 @@
     </section>
 
     <section class="bloco" id="r-dre-bloco" hidden>
-      <h3><svg class="ic"><use href="#ic-faturamento"/></svg>DRE mensal simulado <span class="tag-ex">EXEMPLO</span></h3>
+      <h3><svg class="ic"><use href="#ic-faturamento"/></svg>DRE simulado em 10 meses <span class="tag-ex so-exemplo">EXEMPLO</span></h3>
       <p class="nota ref" id="r-dre-vol"></p>
-      <table class="cen dre" id="r-dre"></table>
+      <div class="dre-rolagem"><table class="cen dre dre-meses" id="r-dre"></table></div>
       <div class="resultado" id="r-res"></div>
     </section>
 
@@ -167,8 +165,8 @@
           <li>Lojas e revendas de seminovos, despachantes e locadoras da região.</li>
         </ul>
       </section>
-      <section class="bloco">
-        <h3><svg class="ic"><use href="#ic-oferta-franquia"/></svg>Oferta de franquia</h3>
+      <section class="bloco bloco-oferta">
+        <h3><svg class="ic"><use href="#ic-oferta-franquia"/></svg>Proposta comercial</h3>
         <div class="oferta-num">
           <div><span>Taxa total</span><b id="r-taxa"></b></div>
           <div><span>Entrada</span><b id="r-ent"></b></div>
@@ -179,6 +177,6 @@
     </div>
 
     <p class="nota ref"><svg class="ic"><use href="#ic-aviso"/></svg><span>Aviso importante: as projeções, estimativas de demanda e o DRE apresentados neste estudo são apenas referenciais. Eles foram calculados com dados públicos (Senatran e IBGE) e com premissas médias, que podem variar de cidade para cidade e conforme a gestão, o ponto comercial, a concorrência e as condições de mercado. Este material não é promessa nem garantia de faturamento, lucro ou retorno do investimento, e não substitui a análise própria do candidato a franqueado.</span></p>
-    <p class="nota"><svg class="ic"><use href="#ic-aviso"/></svg><span><b>Aviso legal [REVISAR – OTÁVIO]:</b> *este estudo é uma estimativa do potencial de mercado da cidade, calculada a partir da frota oficial e dos percentuais e tickets informados. Não constitui promessa nem garantia de faturamento, lucro ou retorno do investimento; o resultado real depende de ponto, concorrência, capacidade, operação e execução comercial. Fontes: Senatran, frota por município e tipo (setembro/2026); IBGE, Estimativa da população 2025 (referência 1º/07/2025).</span></p>
+    <p class="nota"><svg class="ic"><use href="#ic-aviso"/></svg><span>Fontes: Senatran, frota por município e tipo (setembro/2026); IBGE, Estimativa da população 2025 (referência 1º/07/2025).</span></p>
   </main>
 </div>

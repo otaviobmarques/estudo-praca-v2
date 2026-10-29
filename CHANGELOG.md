@@ -1,4 +1,22 @@
 # Registro de mudanças
+## [Não lançado]
+### Alterado
+- "Oferta de franquia" passa a se chamar "Proposta comercial" (PDF, prévia e painel) e ganha destaque: fundo escuro da marca com os valores em vermelho (Auto Visão) ou laranja (Royal), como o quadro de resultado do DRE (pedido do Otávio).
+- Oferta do Full: texto padrão "Entrada inclui:" com a lista Kit de Câmeras e Biometria homologados pelo DETRAN · Projeto Arquitetônico · 2 Vagas de Treinamento · Sistema e App de Laudos (pedido do Otávio). Texto de várias linhas sai em lista no PDF e na tela.
+- Removidas do relatório as notas internas do modelo ("população e frota de Joinville são valores de EXEMPLO herdados do sistema atual…" e "Condição comercial como digitada no painel…"), também no Exemplo Joinville, e o título "Leitura do estudo", que ficou sem conteúdo.
+- Tela principal mais compacta (botões, campos, títulos, cartões e painel menores) e Administração refeita com o mesmo design system da tela (cabeçalho, blocos, campos, botões e selos; redefinição de senha em linha, sem janela do navegador).
+- Removidos os textos provisórios "[REVISAR – OTÁVIO]" e "[VERIFICAR]" dos modelos do relatório e da tela (decisão do Otávio; pendência C7). O aviso fixo aprovado continua em todas as páginas.
+### Corrigido
+- Página de contatos: vão grande entre o título da seção e o contato de expansão.
+- Fontes: Inter, Nunito e Raleway passam a ser servidas pelo próprio sistema (`public/fontes`, licença OFL) em todas as telas e embutidas no PDF; antes cada computador usava a fonte que tivesse instalada. CSP com `font-src 'self' data:`.
+- Selos "EXEMPLO" dos cartões de população e frota e do DRE apareciam também em cidades reais.
+- Campo UF com duas setas.
+- **DRE em 10 meses** (decisão do Otávio, 29/10/2026; ADR-0005): as colunas D–M da planilha de referência viram os meses 1 a 10, com os volumes dela como padrão (transferência 100 → 550, cautelar 10 → 100), editáveis mês a mês no painel, e total dos 10 meses. Pessoal pela regra TETO(laudos ÷ 200). Home Based com a mesma estrutura, começando com os laudos/mês informados em todos os meses.
+- PDF: página do DRE em A4 deitada (10 meses + total); as outras páginas continuam em pé.
+- API: `mesesDre` (10 meses) substitui `laudosUnidade`; `docs/openapi.yaml` 0.3.0.
+- Relatório padrão de Joinville com DRE: de R$ 38.783,80 (um mês com 400 laudos, margem 64,35%) para R$ 369.405,00 em 10 meses (margem 62,21%). O cálculo de um mês com 400 laudos continua testado.
+### Adicionado
+- `.devcontainer/` para rodar o sistema no GitHub Codespaces sem instalar nada no computador: Chromium, fontes do relatório (Inter, Nunito, Raleway), Postgres e migrações automáticos; passos finais em `.devcontainer/LEIA-ME.md`.
 ## [0.2.1] — 2026-10-29
 ### Adicionado
 - Home Based: campo "Marketing (R$/mês)", que começa zerado (decisão 45 do escopo v2.0).

@@ -11,6 +11,7 @@
 44. **Despesas zeradas do Home Based confirmadas:** custo Detran por vistoria e marketing por transferência; aluguel, água, energia e manutenção predial; sistema de filmagem, canal de ouvidoria e certificação ISO + seguros. Todas continuam editáveis em cada estudo.
 45. **Marketing do Home Based:** campo próprio **"Marketing (R$/mês)"**, que **começa zerado** e o Otávio preenche em cada estudo (no Full o marketing continua por vistoria Detran, R$ 8).
 46. **Aviso fixo:** o **mesmo texto** nos dois modelos (Full e Home Based), em todas as páginas.
+47. **DRE em 10 meses (decidido em 29/10/2026, depois da v2.0; ADR-0005):** as colunas D–M da planilha de referência viram os **meses 1 a 10**. Volumes do Full = os da planilha, coluna a coluna (transferência 100 → 550, cautelar 10 → 100), **editáveis mês a mês** no painel; sem divisão 90/10 no DRE. Home Based com a mesma estrutura, só cautelar, começando com os laudos/mês informados em todos os meses (curva [A CONFIRMAR]). Pessoal pela regra TETO(laudos do mês ÷ 200). PDF com a página do DRE em **A4 deitada** (10 meses + total). Substitui o campo "Laudos/mês da unidade" (decisão 30) e a coluna única da seção 7.6 e do M9.
 
 ### Decisões da v1.5 (Otávio, 29/10/2026)
 
@@ -369,7 +370,9 @@ flowchart TD
   F --> R
 ```
 
-### 7.6 DRE mensal (decisão de 28/10/2026, 23h45)
+### 7.6 DRE mensal (decisão de 28/10/2026, 23h45) — em 10 meses desde a decisão 47
+
+> **Atualização (decisão 47, 29/10/2026):** o DRE passou a ter **10 meses**, um por coluna D–M da planilha, com os volumes dela como padrão editável, e o total. Cada mês segue a tabela linha a linha abaixo. Onde este texto fala em "uma coluna" e em "Laudos/mês da unidade", vale a decisão 47.
 
 O relatório ganha, na página seguinte à projeção, um **DRE mensal** da unidade. **Modelo:** `estudo-praca/referencias/dre-auto-visao.xlsx`, aba "DRE_MG_Simulação" (única aba; sem nomes definidos, comentários, validações nem linhas ou colunas ocultas). O sistema reproduz **as mesmas linhas e as mesmas fórmulas** do modelo, com os valores dele como **padrão editável** no painel lateral (seção recolhível "DRE"). Fórmulas extraídas com openpyxl (sem `data_only`) em 28/10/2026.
 
@@ -639,7 +642,7 @@ Nenhuma pendência bloqueia o uso local do MVP; o bloco A bloqueia a publicaçã
 - C4. Textos automáticos com as faixas do site atual (500 mil/200 mil habitantes; 5.000/2.000 laudos), aplicadas ao cenário escolhido.
 - C5. Frota base = frota total do município.
 - C6. Exibição das premissas no relatório: o modelo aprovado da Julia mostra uma linha de premissas (percentual, divisão e tickets); o sistema segue o modelo aprovado.
-- C7. Textos marcados **"[REVISAR – OTÁVIO]"** nos modelos da Julia (mantidos como estão).
+- C7. ~~Textos marcados **"[REVISAR – OTÁVIO]"** nos modelos da Julia~~ — **resolvida em 29/10/2026:** removidos por decisão do Otávio; vale o aviso fixo.
 - C8. Página do DRE do Home Based: a Julia não fez modelo próprio; o sistema reaproveita a página do DRE do Full.
 
 **D. Fases seguintes (não bloqueiam o MVP)**

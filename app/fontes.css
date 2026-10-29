@@ -1,0 +1,6 @@
+/* Fontes servidas pelo próprio sistema (public/fontes, licença OFL), para todas as telas usarem as mesmas
+   famílias em qualquer computador: Inter (texto), Nunito (títulos Auto Visão), Raleway (títulos Royal). */
+@font-face{font-family:"Inter";src:url(/fontes/Inter.woff2) format("woff2");font-weight:100 900;font-style:normal;font-display:swap}
+@font-face{font-family:"Nunito";src:url(/fontes/Nunito.woff2) format("woff2");font-weight:200 1000;font-style:normal;font-display:swap}
+@font-face{font-family:"Raleway";src:url(/fontes/Raleway.woff2) format("woff2");font-weight:100 900;font-style:normal;font-display:swap}
+body,button,input,select,textarea{font-family:"Inter",sans-serif}
