@@ -1,4 +1,8 @@
 # Registro de mudanças
+## [Não lançado]
+### Adicionado
+- **Favicon** (`public/favicon.ico` com 16, 32 e 48 px, o de 16 px desenhado pixel a pixel, e `public/icones/icone.svg`) no mesmo desenho neutro do ícone do aplicativo.
+- **Banner de compartilhamento** 1200 × 630 (`public/og/banner.png`, 25 KB) no visual neutro do login, com as tags Open Graph e Twitter. Gerado por `scripts/gerar_banner.mjs` a partir de `scripts/banner/banner.html`. A imagem usa o endereço de `APP_URL`.
 ## [Não lançado — celular e PWA]
 ### Adicionado
 - **PWA** (ADR-0006): instalável como aplicativo (manifesto, ícones neutros em `public/icones`, service worker). Guarda só arquivos fixos e a página "Sem conexão"; a API e as páginas vão sempre à rede, nada de estudo ou sessão fica no aparelho.

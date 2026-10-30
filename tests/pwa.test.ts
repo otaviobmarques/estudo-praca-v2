@@ -22,3 +22,17 @@ describe("PWA", () => {
     expect(fs.existsSync("public/offline.html")).toBe(true);
   });
 });
+
+describe("Favicon e banner de compartilhamento (pedido do Otávio, 30/10/2026)", () => {
+  it("favicon.ico com 16, 32 e 48 px e ícone em SVG", () => {
+    const ico = fs.readFileSync("public/favicon.ico");
+    expect(ico.readUInt16LE(2)).toBe(1); // tipo ícone
+    const n = ico.readUInt16LE(4), tam = Array.from({ length: n }, (_, i) => ico[6 + i * 16] || 256).sort((a, b) => a - b);
+    expect(tam).toEqual([16, 32, 48]);
+    expect(fs.readFileSync("public/icones/icone.svg", "utf8")).toMatch(/^<svg[^>]+viewBox="0 0 100 100"/);
+  });
+  it("banner 1200 × 630 com menos de 100 KB", () => {
+    expect(png("public/og/banner.png")).toEqual([1200, 630]);
+    expect(fs.statSync("public/og/banner.png").size).toBeLessThan(100 * 1024);
+  });
+});
