@@ -33,6 +33,8 @@ python3 scripts/comparar_previas.py      # compara os PDFs com as prévias da Ju
 SENHA_ARQ=<arquivo> python3 scripts/capturar_tela.py    # compara a tela com as prévias da Julia
 python3 scripts/montar_tela.py           # regenera modelos/tela/painel.html a partir da tela da Julia
 npm run base:gerar -- <frota.xlsx> <populacao.xls>      # regenera e valida a base embutida
+python3 scripts/gerar_icones.py                 # ícones do PWA e favicon (public/icones, public/favicon.ico) — requer Pillow
+node scripts/gerar_banner.mjs                   # banner de compartilhamento public/og/banner.png (1200 × 630, < 100 KB) — requer Playwright e Pillow
 ```
 O teste de fumaça provoca o bloqueio de login de propósito no final; antes de rodar de novo, zere o bloqueio no banco local (`update usuarios set falhas_login=0, bloqueado_ate=null; delete from tentativas_ip;`).
 
