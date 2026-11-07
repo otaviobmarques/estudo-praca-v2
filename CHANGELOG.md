@@ -1,4 +1,9 @@
 # Registro de mudanças
+## [Não lançado — Vercel + Supabase]
+### Alterado
+- Implantação na **Vercel** com banco no **Supabase** (ADR-0007): PDF com `@sparticuz/chromium` na Vercel, pool pelo pooler do Supabase com SSL, região `gru1`, arquivos de modelos/dados/fontes incluídos no pacote das funções.
+### Adicionado
+- Migração `0002_supabase_rls.sql`: RLS em todas as tabelas e sem privilégios para os papéis da API pública do Supabase.
 ## [Não lançado]
 ### Adicionado
 - **Favicon** (`public/favicon.ico` com 16, 32 e 48 px, o de 16 px desenhado pixel a pixel, e `public/icones/icone.svg`) no mesmo desenho neutro do ícone do aplicativo.
