@@ -41,7 +41,7 @@ Gerada de `estudo-praca/bases/` (Senatran set/2026 + Estimativa IBGE 2025): **5.
 | EMAIL_SERVICO | não | serviço de e-mail — **a definir**; hoje o envio é simulado (registra só o domínio do destinatário) |
 
 ## Implantação
-Não feita. Precisa do OK do Otávio: VPS Hostinger, subdomínio, HTTPS, imagem com Chromium, serviço de e-mail.
+Vercel (aplicação, região `gru1`) + Supabase (projeto `estudo-praca`, sa-east-1) — ver `docs/adr/0007-implantacao-vercel-supabase.md`. Variáveis na Vercel: `DATABASE_URL` (pooler do Supabase, porta 6543) e `APP_URL`. Domínio próprio e serviço de e-mail continuam pendentes.
 
 ## Pendências
 Ver o relatório de entrega e `CHANGELOG.md`.

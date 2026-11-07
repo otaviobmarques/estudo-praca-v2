@@ -4,5 +4,8 @@ const seguranca = [
   { key: "X-Content-Type-Options", value: "nosniff" }, { key: "Referrer-Policy", value: "no-referrer" },
   { key: "Strict-Transport-Security", value: "max-age=31536000; includeSubDomains" },
 ];
-const config: NextConfig = { output: "standalone", serverExternalPackages: ["@node-rs/argon2", "puppeteer-core"], async headers() { return [{ source: "/:path*", headers: seguranca }, { source: "/sw.js", headers: [{ key: "Cache-Control", value: "no-cache" }] }]; } };
+const config: NextConfig = { output: "standalone", serverExternalPackages: ["@node-rs/argon2", "puppeteer-core", "@sparticuz/chromium"],
+  // Arquivos lidos do disco em tempo de execução (modelos da Julia, base embutida, fontes e logos embutidos no PDF).
+  outputFileTracingIncludes: { "/**": ["./modelos/**/*", "./dados/**/*", "./public/fontes/**/*", "./public/*.svg"], "/api/v1/relatorios/**": ["./node_modules/@sparticuz/chromium/bin/**/*"] },
+  async headers() { return [{ source: "/:path*", headers: seguranca }, { source: "/sw.js", headers: [{ key: "Cache-Control", value: "no-cache" }] }]; } };
 export default config;

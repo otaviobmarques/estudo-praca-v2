@@ -1,6 +1,14 @@
 import puppeteer, { type Browser } from "puppeteer-core";
+/** Na Vercel (sem Chrome instalado) usa o Chromium do @sparticuz/chromium; fora dela, CHROME_PATH ou o Chrome do sistema. */
+async function abrir(): Promise<Browser> {
+  if (process.env.VERCEL && !process.env.CHROME_PATH) {
+    const chromium = (await import("@sparticuz/chromium")).default;
+    return puppeteer.launch({ executablePath: await chromium.executablePath(), args: [...chromium.args, "--disable-gpu"], headless: true });
+  }
+  return puppeteer.launch({ executablePath: process.env.CHROME_PATH ?? "/usr/bin/google-chrome", args: ["--no-sandbox", "--disable-gpu"], headless: true });
+}
 async function comPagina<T>(html: string, f: (p: import("puppeteer-core").Page) => Promise<T>) {
-  const b: Browser = await puppeteer.launch({ executablePath: process.env.CHROME_PATH ?? "/usr/bin/google-chrome", args: ["--no-sandbox", "--disable-gpu"], headless: true });
+  const b = await abrir();
   try {
     const p = await b.newPage();
     await p.setJavaScriptEnabled(false); // HTML só de leitura
